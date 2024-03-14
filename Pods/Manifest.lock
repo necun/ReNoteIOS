@@ -1,0 +1,87 @@
+PODS:
+  - Alamofire (4.8.2)
+  - CLImageEditor/AllTools (0.2.4):
+    - CLImageEditor/Core
+    - CLImageEditor/EmoticonTool
+    - CLImageEditor/ResizeTool
+    - CLImageEditor/SplashTool
+    - CLImageEditor/StickerTool
+    - CLImageEditor/TextTool
+  - CLImageEditor/Core (0.2.4)
+  - CLImageEditor/EmoticonTool (0.2.4):
+    - CLImageEditor/Core
+  - CLImageEditor/ResizeTool (0.2.4):
+    - CLImageEditor/Core
+  - CLImageEditor/SplashTool (0.2.4):
+    - CLImageEditor/Core
+  - CLImageEditor/StickerTool (0.2.4):
+    - CLImageEditor/Core
+  - CLImageEditor/TextTool (0.2.4):
+    - CLImageEditor/Core
+  - CropPickerView (0.1.3)
+  - FlagPhoneNumber (0.7.6):
+    - FlagPhoneNumber/libPhoneNumberiOS (= 0.7.6)
+  - FlagPhoneNumber/libPhoneNumberiOS (0.7.6)
+  - ImageScrollView (1.9.3)
+  - IQLabelView (0.2.1)
+  - MSAL (1.2.22):
+    - MSAL/app-lib (= 1.2.22)
+  - MSAL/app-lib (1.2.22)
+  - PDFGenerator (3.1.0)
+  - QBImagePickerController (3.4.0)
+  - SDWebImage (3.8.3):
+    - SDWebImage/Core (= 3.8.3)
+  - SDWebImage/Core (3.8.3)
+  - SwiftyDropbox (5.1.0):
+    - Alamofire (~> 4.8.2)
+  - SwiftyJSON (5.0.1)
+  - Zip (2.1.2)
+
+DEPENDENCIES:
+  - CLImageEditor/AllTools
+  - CropPickerView (~> 0.1.3)
+  - FlagPhoneNumber (= 0.7.6)
+  - ImageScrollView
+  - IQLabelView (~> 0.2)
+  - MSAL
+  - PDFGenerator
+  - QBImagePickerController (~> 3.4)
+  - SDWebImage (~> 3.6)
+  - SwiftyDropbox (~> 5.1.0)
+  - SwiftyJSON (~> 5.0)
+  - Zip (~> 2.1)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CLImageEditor
+    - CropPickerView
+    - FlagPhoneNumber
+    - ImageScrollView
+    - IQLabelView
+    - MSAL
+    - PDFGenerator
+    - QBImagePickerController
+    - SDWebImage
+    - SwiftyDropbox
+    - SwiftyJSON
+    - Zip
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  CLImageEditor: dc3e5358f641368da3a76fc1c744a4c2ceb270ad
+  CropPickerView: ecf0c8d77fc876c114a97c5481dd86903ab61314
+  FlagPhoneNumber: ee8d015e7e92b776a3598e6a36718196e0d0dcf5
+  ImageScrollView: d3ce8371e0d44299b2b638410db45387e18aa83f
+  IQLabelView: 00f36d868f6dfb07e45f737acaa2b7d355d3182f
+  MSAL: aa2b5d45e9bcceb6233c15240d65050777e27879
+  PDFGenerator: 17d6bc525db0a3fcd156fbf00f9d1b8d5cc75d1e
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
+  SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
+
+PODFILE CHECKSUM: 473485ef2b9aa388999fb5d4d35499fca89e1f43
+
+COCOAPODS: 1.14.3

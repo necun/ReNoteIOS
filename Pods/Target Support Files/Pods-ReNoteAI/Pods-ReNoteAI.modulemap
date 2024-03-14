@@ -1,0 +1,6 @@
+framework module Pods_ReNoteAI {
+  umbrella header "Pods-ReNoteAI-umbrella.h"
+
+  export *
+  module * { export * }
+}

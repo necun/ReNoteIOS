@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Type=Login, Type 2=Social, Type 3=Google, Style=Default, State=Default, Theme=Light, Component=Button.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Type=Login, Type 2=Social, Type 3=Google, Style=Default, State=Default, Theme=Light, Component=Button 1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Type=Login, Type 2=Social, Type 3=Google, Style=Default, State=Default, Theme=Light, Component=Button 2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

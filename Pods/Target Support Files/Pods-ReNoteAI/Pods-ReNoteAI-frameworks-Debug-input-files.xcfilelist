@@ -1,0 +1,14 @@
+${PODS_ROOT}/Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/CLImageEditor/CLImageEditor.framework
+${BUILT_PRODUCTS_DIR}/CropPickerView/CropPickerView.framework
+${BUILT_PRODUCTS_DIR}/FlagPhoneNumber/FlagPhoneNumber.framework
+${BUILT_PRODUCTS_DIR}/IQLabelView/IQLabelView.framework
+${BUILT_PRODUCTS_DIR}/ImageScrollView/ImageScrollView.framework
+${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework
+${BUILT_PRODUCTS_DIR}/PDFGenerator/PDFGenerator.framework
+${BUILT_PRODUCTS_DIR}/QBImagePickerController/QBImagePickerController.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/Zip/Zip.framework

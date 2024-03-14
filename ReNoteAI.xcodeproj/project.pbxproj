@@ -1,0 +1,870 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		144A65322B998EB900803A91 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A65312B998EB900803A91 /* ScannerView.swift */; };
+		145B1A952BA1882C0087CCD6 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B1A942BA1882C0087CCD6 /* Document.swift */; };
+		3CBB9DA3EB4E7045EE13C5F6 /* Pods_ReNoteAI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D7E462895C503F1EDB18F1 /* Pods_ReNoteAI.framework */; };
+		733E70542B9444BD000ABE1B /* AddNewTagFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E70532B9444BD000ABE1B /* AddNewTagFolderView.swift */; };
+		73C156942B85C70B009DA167 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156932B85C70B009DA167 /* ProfileView.swift */; };
+		73C156972B85C744009DA167 /* CustomSingleSignOnButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156962B85C744009DA167 /* CustomSingleSignOnButton.swift */; };
+		73C156992B85C77E009DA167 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156982B85C77E009DA167 /* CustomBackButton.swift */; };
+		73C1569C2B85C7CA009DA167 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1569B2B85C7CA009DA167 /* Theme.swift */; };
+		73C1569E2B85C800009DA167 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1569D2B85C800009DA167 /* ThemeColors.swift */; };
+		73C156A02B85C83D009DA167 /* OTPBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C1569F2B85C83D009DA167 /* OTPBoxView.swift */; };
+		73C156A22B85C872009DA167 /* OTPTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156A12B85C872009DA167 /* OTPTimerView.swift */; };
+		73C156A42B85C88C009DA167 /* ResendOTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156A32B85C88C009DA167 /* ResendOTPButton.swift */; };
+		73C156A62B85C8BC009DA167 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156A52B85C8BC009DA167 /* EmailTextField.swift */; };
+		73C156A82B85C8E6009DA167 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156A72B85C8E6009DA167 /* PasswordTextField.swift */; };
+		73C156AB2B85C949009DA167 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156AA2B85C949009DA167 /* Util.swift */; };
+		73C156AD2B85CA16009DA167 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156AC2B85CA16009DA167 /* CustomTextField.swift */; };
+		73C156AF2B85CA88009DA167 /* ConfirmPasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156AE2B85CA88009DA167 /* ConfirmPasswordTextField.swift */; };
+		73C156B22B85D5A2009DA167 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156B12B85D5A2009DA167 /* SignInView.swift */; };
+		73C156B52B85D5ED009DA167 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156B42B85D5ED009DA167 /* SignUpView.swift */; };
+		73C156B82B85D6D9009DA167 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156B72B85D6D9009DA167 /* ForgetPasswordView.swift */; };
+		73C156BA2B85D723009DA167 /* SignInOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156B92B85D723009DA167 /* SignInOTPView.swift */; };
+		73C156BD2B85D753009DA167 /* CreatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156BC2B85D753009DA167 /* CreatePasswordView.swift */; };
+		73C156BF2B85E67A009DA167 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73C156BE2B85E67A009DA167 /* Launch Screen.storyboard */; };
+		73C156FB2B8976F7009DA167 /* GoogleDriveClient in Frameworks */ = {isa = PBXBuildFile; productRef = 73C156FA2B8976F7009DA167 /* GoogleDriveClient */; };
+		73C156FD2B8977A7009DA167 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156FC2B8977A7009DA167 /* Dependencies.swift */; };
+		73C157002B897897009DA167 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 73C156FF2B897897009DA167 /* Dependencies */; };
+		73C157022B897897009DA167 /* DependenciesMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 73C157012B897897009DA167 /* DependenciesMacros */; };
+		73C157042B897B2C009DA167 /* GoogleAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C157032B897B2C009DA167 /* GoogleAuthentication.swift */; };
+		73C157062B898EF1009DA167 /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C157052B898EF1009DA167 /* Logo.swift */; };
+		73C157092B898FEC009DA167 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C157082B898FEC009DA167 /* HomeScreen.swift */; };
+		73FEA0682B7C55DB00E0CA77 /* ReNoteAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0672B7C55DB00E0CA77 /* ReNoteAIApp.swift */; };
+		73FEA06A2B7C55DB00E0CA77 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0692B7C55DB00E0CA77 /* ContentView.swift */; };
+		73FEA06E2B7C55E600E0CA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73FEA06D2B7C55E600E0CA77 /* Assets.xcassets */; };
+		73FEA0712B7C55E600E0CA77 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73FEA0702B7C55E600E0CA77 /* Preview Assets.xcassets */; };
+		73FEA0B52B7C964000E0CA77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0B42B7C964000E0CA77 /* AppDelegate.swift */; };
+		73FEA0BD2B7CF14900E0CA77 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0BC2B7CF14900E0CA77 /* User.swift */; };
+		73FEA0C02B7CF66300E0CA77 /* DocumentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0BF2B7CF66300E0CA77 /* DocumentDetailView.swift */; };
+		73FEA0C22B7D83D600E0CA77 /* DocumentListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0C12B7D83D600E0CA77 /* DocumentListingView.swift */; };
+		73FEA0C52B7D90D800E0CA77 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0C42B7D90D800E0CA77 /* Folder.swift */; };
+		73FEA0C72B7D95B900E0CA77 /* DocumentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0C62B7D95B900E0CA77 /* DocumentListView.swift */; };
+		73FEA0CA2B7D9AC600E0CA77 /* AddDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FEA0C92B7D9AC600E0CA77 /* AddDocumentView.swift */; };
+		73FEA0EA2B8193C900E0CA77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73FEA0E92B8193C900E0CA77 /* GoogleService-Info.plist */; };
+		C510DCD32B8A17C50082C740 /* CustomTabbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510DCD22B8A17C50082C740 /* CustomTabbarButton.swift */; };
+		C510DCD52B8A19530082C740 /* CustomTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C510DCD42B8A19530082C740 /* CustomTabbar.swift */; };
+		C5528DEA2B886CE100820F85 /* MicrosoftAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5528DE92B886CE100820F85 /* MicrosoftAuth.swift */; };
+		C5528DEC2B88712A00820F85 /* Microsoft Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5528DEB2B88712A00820F85 /* Microsoft Property List.plist */; };
+		C57C4AC82B9336A600424824 /* EmptyFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57C4AC72B9336A600424824 /* EmptyFilesView.swift */; };
+		C57C4ACA2B94187400424824 /* FoldersListVjew.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57C4AC92B94187400424824 /* FoldersListVjew.swift */; };
+		C57E79F02B9189E600CB9881 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57E79EF2B9189E600CB9881 /* TagView.swift */; };
+		C58445032B8DAD5C0061494B /* QrView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58445022B8DAD5C0061494B /* QrView.swift */; };
+		C5887B932B8C98DA008A87DF /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5887B922B8C98DA008A87DF /* FolderView.swift */; };
+		C58C063B2B8EEE290089ED16 /* AppleAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C063A2B8EEE290089ED16 /* AppleAuthentication.swift */; };
+		C58C063E2B8F2DA00089ED16 /* SchemaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58C063D2B8F2DA00089ED16 /* SchemaData.swift */; };
+		C5A9EB652B9EFAE700345BC1 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C5A9EB632B9EFAE700345BC1 /* CoreData.xcdatamodeld */; };
+		C5B5AB2B2B91FE9700DFFFD6 /* UploadFileToGDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5AB2A2B91FE9700DFFFD6 /* UploadFileToGDrive.swift */; };
+		C5B5AB2D2B91FEDA00DFFFD6 /* CreateFolderInGDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5AB2C2B91FEDA00DFFFD6 /* CreateFolderInGDrive.swift */; };
+		C5B5AB2F2B91FEEF00DFFFD6 /* FetchSchemaFileInGDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5AB2E2B91FEEF00DFFFD6 /* FetchSchemaFileInGDrive.swift */; };
+		C5B5AB312B92001800DFFFD6 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5AB302B92001800DFFFD6 /* DataBaseManager.swift */; };
+		C5B5AB332B93095200DFFFD6 /* RegisterToSyncView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B5AB322B93095200DFFFD6 /* RegisterToSyncView.swift */; };
+		C5E48E7A2B96E41D005F4B59 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E48E792B96E41D005F4B59 /* Tag.swift */; };
+		C5E48E7C2B973B35005F4B59 /* PDFPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E48E7B2B973B35005F4B59 /* PDFPreview.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		144A65312B998EB900803A91 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		145B1A942BA1882C0087CCD6 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		2FADEA7A9DFBE9FF9D43513F /* Pods-ReNoteAI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNoteAI.debug.xcconfig"; path = "Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI.debug.xcconfig"; sourceTree = "<group>"; };
+		68EF319A4BD0136F1EA2E693 /* Pods-ReNoteAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNoteAI.release.xcconfig"; path = "Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI.release.xcconfig"; sourceTree = "<group>"; };
+		733E70532B9444BD000ABE1B /* AddNewTagFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTagFolderView.swift; sourceTree = "<group>"; };
+		73C156932B85C70B009DA167 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		73C156962B85C744009DA167 /* CustomSingleSignOnButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSingleSignOnButton.swift; sourceTree = "<group>"; };
+		73C156982B85C77E009DA167 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
+		73C1569B2B85C7CA009DA167 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		73C1569D2B85C800009DA167 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
+		73C1569F2B85C83D009DA167 /* OTPBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPBoxView.swift; sourceTree = "<group>"; };
+		73C156A12B85C872009DA167 /* OTPTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTimerView.swift; sourceTree = "<group>"; };
+		73C156A32B85C88C009DA167 /* ResendOTPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendOTPButton.swift; sourceTree = "<group>"; };
+		73C156A52B85C8BC009DA167 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
+		73C156A72B85C8E6009DA167 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		73C156AA2B85C949009DA167 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		73C156AC2B85CA16009DA167 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		73C156AE2B85CA88009DA167 /* ConfirmPasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPasswordTextField.swift; sourceTree = "<group>"; };
+		73C156B12B85D5A2009DA167 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		73C156B42B85D5ED009DA167 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		73C156B72B85D6D9009DA167 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
+		73C156B92B85D723009DA167 /* SignInOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInOTPView.swift; sourceTree = "<group>"; };
+		73C156BC2B85D753009DA167 /* CreatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordView.swift; sourceTree = "<group>"; };
+		73C156BE2B85E67A009DA167 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		73C156FC2B8977A7009DA167 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		73C157032B897B2C009DA167 /* GoogleAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthentication.swift; sourceTree = "<group>"; };
+		73C157052B898EF1009DA167 /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
+		73C157082B898FEC009DA167 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		73FEA0642B7C55DB00E0CA77 /* ReNoteAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReNoteAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		73FEA0672B7C55DB00E0CA77 /* ReNoteAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReNoteAIApp.swift; sourceTree = "<group>"; };
+		73FEA0692B7C55DB00E0CA77 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		73FEA06D2B7C55E600E0CA77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		73FEA0702B7C55E600E0CA77 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		73FEA0B42B7C964000E0CA77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		73FEA0BB2B7CAE0300E0CA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		73FEA0BC2B7CF14900E0CA77 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		73FEA0BF2B7CF66300E0CA77 /* DocumentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailView.swift; sourceTree = "<group>"; };
+		73FEA0C12B7D83D600E0CA77 /* DocumentListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListingView.swift; sourceTree = "<group>"; };
+		73FEA0C42B7D90D800E0CA77 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		73FEA0C62B7D95B900E0CA77 /* DocumentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentListView.swift; sourceTree = "<group>"; };
+		73FEA0C92B7D9AC600E0CA77 /* AddDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocumentView.swift; sourceTree = "<group>"; };
+		73FEA0E92B8193C900E0CA77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C510DCD22B8A17C50082C740 /* CustomTabbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarButton.swift; sourceTree = "<group>"; };
+		C510DCD42B8A19530082C740 /* CustomTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbar.swift; sourceTree = "<group>"; };
+		C5528DE92B886CE100820F85 /* MicrosoftAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftAuth.swift; sourceTree = "<group>"; };
+		C5528DEB2B88712A00820F85 /* Microsoft Property List.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Microsoft Property List.plist"; sourceTree = "<group>"; };
+		C57C4AC72B9336A600424824 /* EmptyFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFilesView.swift; sourceTree = "<group>"; };
+		C57C4AC92B94187400424824 /* FoldersListVjew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersListVjew.swift; sourceTree = "<group>"; };
+		C57E79EF2B9189E600CB9881 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		C58445022B8DAD5C0061494B /* QrView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrView.swift; sourceTree = "<group>"; };
+		C5887B922B8C98DA008A87DF /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
+		C58C063A2B8EEE290089ED16 /* AppleAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthentication.swift; sourceTree = "<group>"; };
+		C58C063C2B8F283E0089ED16 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		C58C063D2B8F2DA00089ED16 /* SchemaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaData.swift; sourceTree = "<group>"; };
+		C5A9EB642B9EFAE700345BC1 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		C5B5AB2A2B91FE9700DFFFD6 /* UploadFileToGDrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileToGDrive.swift; sourceTree = "<group>"; };
+		C5B5AB2C2B91FEDA00DFFFD6 /* CreateFolderInGDrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFolderInGDrive.swift; sourceTree = "<group>"; };
+		C5B5AB2E2B91FEEF00DFFFD6 /* FetchSchemaFileInGDrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchSchemaFileInGDrive.swift; sourceTree = "<group>"; };
+		C5B5AB302B92001800DFFFD6 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
+		C5B5AB322B93095200DFFFD6 /* RegisterToSyncView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterToSyncView.swift; sourceTree = "<group>"; };
+		C5E48E792B96E41D005F4B59 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		C5E48E7B2B973B35005F4B59 /* PDFPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPreview.swift; sourceTree = "<group>"; };
+		C9D7E462895C503F1EDB18F1 /* Pods_ReNoteAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReNoteAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		73FEA0612B7C55DB00E0CA77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73C157002B897897009DA167 /* Dependencies in Frameworks */,
+				3CBB9DA3EB4E7045EE13C5F6 /* Pods_ReNoteAI.framework in Frameworks */,
+				73C157022B897897009DA167 /* DependenciesMacros in Frameworks */,
+				73C156FB2B8976F7009DA167 /* GoogleDriveClient in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		73C156922B85C6ED009DA167 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				73C156932B85C70B009DA167 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		73C156952B85C737009DA167 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				73C156962B85C744009DA167 /* CustomSingleSignOnButton.swift */,
+				73C156AE2B85CA88009DA167 /* ConfirmPasswordTextField.swift */,
+				73C156AC2B85CA16009DA167 /* CustomTextField.swift */,
+				73C156A72B85C8E6009DA167 /* PasswordTextField.swift */,
+				73C156A32B85C88C009DA167 /* ResendOTPButton.swift */,
+				73C156982B85C77E009DA167 /* CustomBackButton.swift */,
+				73C1569F2B85C83D009DA167 /* OTPBoxView.swift */,
+				73C156A12B85C872009DA167 /* OTPTimerView.swift */,
+				73C156A52B85C8BC009DA167 /* EmailTextField.swift */,
+				73C157052B898EF1009DA167 /* Logo.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		73C1569A2B85C7B4009DA167 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				73C1569B2B85C7CA009DA167 /* Theme.swift */,
+				73C1569D2B85C800009DA167 /* ThemeColors.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		73C156A92B85C92D009DA167 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				73C156AA2B85C949009DA167 /* Util.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		73C156B02B85D584009DA167 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				73C156B12B85D5A2009DA167 /* SignInView.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		73C156B32B85D5D4009DA167 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				73C156B42B85D5ED009DA167 /* SignUpView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		73C156B62B85D6BE009DA167 /* ForgetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				73C156B72B85D6D9009DA167 /* ForgetPasswordView.swift */,
+			);
+			path = ForgetPassword;
+			sourceTree = "<group>";
+		};
+		73C156BB2B85D73C009DA167 /* CreatePassword */ = {
+			isa = PBXGroup;
+			children = (
+				73C156BC2B85D753009DA167 /* CreatePasswordView.swift */,
+			);
+			path = CreatePassword;
+			sourceTree = "<group>";
+		};
+		73C157072B898FDC009DA167 /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				73C157082B898FEC009DA167 /* HomeScreen.swift */,
+				733E70532B9444BD000ABE1B /* AddNewTagFolderView.swift */,
+				C57C4AC92B94187400424824 /* FoldersListVjew.swift */,
+				C5B5AB322B93095200DFFFD6 /* RegisterToSyncView.swift */,
+				C57C4AC72B9336A600424824 /* EmptyFilesView.swift */,
+				C57E79EF2B9189E600CB9881 /* TagView.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		73C1570A2B8990CB009DA167 /* DriveIntegrations */ = {
+			isa = PBXGroup;
+			children = (
+				C5B5AB302B92001800DFFFD6 /* DataBaseManager.swift */,
+				C5A9EB632B9EFAE700345BC1 /* CoreData.xcdatamodeld */,
+				C58C06392B8EEE130089ED16 /* Icloud */,
+				73C1570B2B8990E2009DA167 /* Google */,
+				73FEA0B12B7C95C300E0CA77 /* Microsoft */,
+			);
+			path = DriveIntegrations;
+			sourceTree = "<group>";
+		};
+		73C1570B2B8990E2009DA167 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				C5B5AB292B91FE8300DFFFD6 /* SyncingFiles */,
+				73C157032B897B2C009DA167 /* GoogleAuthentication.swift */,
+				73C156FC2B8977A7009DA167 /* Dependencies.swift */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
+		73FEA05B2B7C55DB00E0CA77 = {
+			isa = PBXGroup;
+			children = (
+				73FEA0662B7C55DB00E0CA77 /* ReNoteAI */,
+				73FEA0652B7C55DB00E0CA77 /* Products */,
+				DBEE8C8567D2C092631B09C2 /* Pods */,
+				C04A218DB0CD56C042E256CC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		73FEA0652B7C55DB00E0CA77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				73FEA0642B7C55DB00E0CA77 /* ReNoteAI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73FEA0662B7C55DB00E0CA77 /* ReNoteAI */ = {
+			isa = PBXGroup;
+			children = (
+				73FEA0BB2B7CAE0300E0CA77 /* Info.plist */,
+				73C156B92B85D723009DA167 /* SignInOTPView.swift */,
+				C510DCD12B8A17B70082C740 /* Tabbar */,
+				73C1570A2B8990CB009DA167 /* DriveIntegrations */,
+				73C157072B898FDC009DA167 /* HomeScreen */,
+				73C156BB2B85D73C009DA167 /* CreatePassword */,
+				73C156B62B85D6BE009DA167 /* ForgetPassword */,
+				73C156B32B85D5D4009DA167 /* SignUp */,
+				73C156B02B85D584009DA167 /* SignIn */,
+				73C156A92B85C92D009DA167 /* Utils */,
+				73C1569A2B85C7B4009DA167 /* Styles */,
+				73C156952B85C737009DA167 /* Components */,
+				73C156922B85C6ED009DA167 /* Profile */,
+				73FEA0C82B7D9AA800E0CA77 /* Add Destination */,
+				73FEA0BE2B7CF64D00E0CA77 /* Document Details */,
+				73FEA0772B7C572600E0CA77 /* SwiftData */,
+				73FEA0672B7C55DB00E0CA77 /* ReNoteAIApp.swift */,
+				73FEA0692B7C55DB00E0CA77 /* ContentView.swift */,
+				73C156BE2B85E67A009DA167 /* Launch Screen.storyboard */,
+				73FEA0B42B7C964000E0CA77 /* AppDelegate.swift */,
+				C5E48E7B2B973B35005F4B59 /* PDFPreview.swift */,
+				73FEA06D2B7C55E600E0CA77 /* Assets.xcassets */,
+				73FEA06F2B7C55E600E0CA77 /* Preview Content */,
+			);
+			path = ReNoteAI;
+			sourceTree = "<group>";
+		};
+		73FEA06F2B7C55E600E0CA77 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				73FEA0702B7C55E600E0CA77 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		73FEA0772B7C572600E0CA77 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				145B1A942BA1882C0087CCD6 /* Document.swift */,
+				73FEA0C42B7D90D800E0CA77 /* Folder.swift */,
+				73FEA0BC2B7CF14900E0CA77 /* User.swift */,
+				C5E48E792B96E41D005F4B59 /* Tag.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		73FEA0B12B7C95C300E0CA77 /* Microsoft */ = {
+			isa = PBXGroup;
+			children = (
+				C526F27E2B8866E400327B6D /* Auth */,
+			);
+			path = Microsoft;
+			sourceTree = "<group>";
+		};
+		73FEA0BE2B7CF64D00E0CA77 /* Document Details */ = {
+			isa = PBXGroup;
+			children = (
+				73FEA0E92B8193C900E0CA77 /* GoogleService-Info.plist */,
+				73FEA0BF2B7CF66300E0CA77 /* DocumentDetailView.swift */,
+				73FEA0C12B7D83D600E0CA77 /* DocumentListingView.swift */,
+				73FEA0C62B7D95B900E0CA77 /* DocumentListView.swift */,
+			);
+			path = "Document Details";
+			sourceTree = "<group>";
+		};
+		73FEA0C82B7D9AA800E0CA77 /* Add Destination */ = {
+			isa = PBXGroup;
+			children = (
+				73FEA0C92B7D9AC600E0CA77 /* AddDocumentView.swift */,
+				C5887B922B8C98DA008A87DF /* FolderView.swift */,
+			);
+			path = "Add Destination";
+			sourceTree = "<group>";
+		};
+		C04A218DB0CD56C042E256CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C9D7E462895C503F1EDB18F1 /* Pods_ReNoteAI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C510DCD12B8A17B70082C740 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				C510DCD22B8A17C50082C740 /* CustomTabbarButton.swift */,
+				C510DCD42B8A19530082C740 /* CustomTabbar.swift */,
+				C58C063C2B8F283E0089ED16 /* schema.json */,
+				C58C063D2B8F2DA00089ED16 /* SchemaData.swift */,
+				C58445022B8DAD5C0061494B /* QrView.swift */,
+				144A65312B998EB900803A91 /* ScannerView.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		C526F27E2B8866E400327B6D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C5528DE92B886CE100820F85 /* MicrosoftAuth.swift */,
+				C5528DEB2B88712A00820F85 /* Microsoft Property List.plist */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		C58C06392B8EEE130089ED16 /* Icloud */ = {
+			isa = PBXGroup;
+			children = (
+				C58C063A2B8EEE290089ED16 /* AppleAuthentication.swift */,
+			);
+			path = Icloud;
+			sourceTree = "<group>";
+		};
+		C5B5AB292B91FE8300DFFFD6 /* SyncingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				C5B5AB2C2B91FEDA00DFFFD6 /* CreateFolderInGDrive.swift */,
+				C5B5AB2A2B91FE9700DFFFD6 /* UploadFileToGDrive.swift */,
+				C5B5AB2E2B91FEEF00DFFFD6 /* FetchSchemaFileInGDrive.swift */,
+			);
+			path = SyncingFiles;
+			sourceTree = "<group>";
+		};
+		DBEE8C8567D2C092631B09C2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2FADEA7A9DFBE9FF9D43513F /* Pods-ReNoteAI.debug.xcconfig */,
+				68EF319A4BD0136F1EA2E693 /* Pods-ReNoteAI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		73FEA0632B7C55DB00E0CA77 /* ReNoteAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73FEA0742B7C55E600E0CA77 /* Build configuration list for PBXNativeTarget "ReNoteAI" */;
+			buildPhases = (
+				3A2C28A530E3EAAB3E6A8C13 /* [CP] Check Pods Manifest.lock */,
+				73FEA0602B7C55DB00E0CA77 /* Sources */,
+				73FEA0612B7C55DB00E0CA77 /* Frameworks */,
+				73FEA0622B7C55DB00E0CA77 /* Resources */,
+				62FC57982ADE663F90866378 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReNoteAI;
+			packageProductDependencies = (
+				73C156FA2B8976F7009DA167 /* GoogleDriveClient */,
+				73C156FF2B897897009DA167 /* Dependencies */,
+				73C157012B897897009DA167 /* DependenciesMacros */,
+			);
+			productName = ReNoteAI;
+			productReference = 73FEA0642B7C55DB00E0CA77 /* ReNoteAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		73FEA05C2B7C55DB00E0CA77 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					73FEA0632B7C55DB00E0CA77 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 73FEA05F2B7C55DB00E0CA77 /* Build configuration list for PBXProject "ReNoteAI" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 73FEA05B2B7C55DB00E0CA77;
+			packageReferences = (
+				73C156F92B8976F7009DA167 /* XCRemoteSwiftPackageReference "swift-google-drive-client" */,
+				73C156FE2B897897009DA167 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+			);
+			productRefGroup = 73FEA0652B7C55DB00E0CA77 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				73FEA0632B7C55DB00E0CA77 /* ReNoteAI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		73FEA0622B7C55DB00E0CA77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73FEA0712B7C55E600E0CA77 /* Preview Assets.xcassets in Resources */,
+				73FEA06E2B7C55E600E0CA77 /* Assets.xcassets in Resources */,
+				73C156BF2B85E67A009DA167 /* Launch Screen.storyboard in Resources */,
+				C5528DEC2B88712A00820F85 /* Microsoft Property List.plist in Resources */,
+				73FEA0EA2B8193C900E0CA77 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A2C28A530E3EAAB3E6A8C13 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReNoteAI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		62FC57982ADE663F90866378 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73FEA0602B7C55DB00E0CA77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73FEA0C72B7D95B900E0CA77 /* DocumentListView.swift in Sources */,
+				73C156BD2B85D753009DA167 /* CreatePasswordView.swift in Sources */,
+				C57C4AC82B9336A600424824 /* EmptyFilesView.swift in Sources */,
+				144A65322B998EB900803A91 /* ScannerView.swift in Sources */,
+				C58C063B2B8EEE290089ED16 /* AppleAuthentication.swift in Sources */,
+				73FEA0CA2B7D9AC600E0CA77 /* AddDocumentView.swift in Sources */,
+				73C156B82B85D6D9009DA167 /* ForgetPasswordView.swift in Sources */,
+				C5B5AB2B2B91FE9700DFFFD6 /* UploadFileToGDrive.swift in Sources */,
+				73C156A02B85C83D009DA167 /* OTPBoxView.swift in Sources */,
+				73FEA0B52B7C964000E0CA77 /* AppDelegate.swift in Sources */,
+				C5B5AB2F2B91FEEF00DFFFD6 /* FetchSchemaFileInGDrive.swift in Sources */,
+				733E70542B9444BD000ABE1B /* AddNewTagFolderView.swift in Sources */,
+				73C156BA2B85D723009DA167 /* SignInOTPView.swift in Sources */,
+				73C156AB2B85C949009DA167 /* Util.swift in Sources */,
+				C57C4ACA2B94187400424824 /* FoldersListVjew.swift in Sources */,
+				73FEA06A2B7C55DB00E0CA77 /* ContentView.swift in Sources */,
+				73C156B22B85D5A2009DA167 /* SignInView.swift in Sources */,
+				C5528DEA2B886CE100820F85 /* MicrosoftAuth.swift in Sources */,
+				C510DCD52B8A19530082C740 /* CustomTabbar.swift in Sources */,
+				73C156972B85C744009DA167 /* CustomSingleSignOnButton.swift in Sources */,
+				73C1569E2B85C800009DA167 /* ThemeColors.swift in Sources */,
+				73C156AF2B85CA88009DA167 /* ConfirmPasswordTextField.swift in Sources */,
+				C510DCD32B8A17C50082C740 /* CustomTabbarButton.swift in Sources */,
+				73C156A42B85C88C009DA167 /* ResendOTPButton.swift in Sources */,
+				73C156942B85C70B009DA167 /* ProfileView.swift in Sources */,
+				145B1A952BA1882C0087CCD6 /* Document.swift in Sources */,
+				73C156A82B85C8E6009DA167 /* PasswordTextField.swift in Sources */,
+				C58C063E2B8F2DA00089ED16 /* SchemaData.swift in Sources */,
+				73C156AD2B85CA16009DA167 /* CustomTextField.swift in Sources */,
+				73FEA0C52B7D90D800E0CA77 /* Folder.swift in Sources */,
+				73C156B52B85D5ED009DA167 /* SignUpView.swift in Sources */,
+				73C156FD2B8977A7009DA167 /* Dependencies.swift in Sources */,
+				73C157062B898EF1009DA167 /* Logo.swift in Sources */,
+				C5887B932B8C98DA008A87DF /* FolderView.swift in Sources */,
+				73C157042B897B2C009DA167 /* GoogleAuthentication.swift in Sources */,
+				C5B5AB332B93095200DFFFD6 /* RegisterToSyncView.swift in Sources */,
+				73C156A62B85C8BC009DA167 /* EmailTextField.swift in Sources */,
+				C5B5AB312B92001800DFFFD6 /* DataBaseManager.swift in Sources */,
+				73FEA0BD2B7CF14900E0CA77 /* User.swift in Sources */,
+				C57E79F02B9189E600CB9881 /* TagView.swift in Sources */,
+				C5B5AB2D2B91FEDA00DFFFD6 /* CreateFolderInGDrive.swift in Sources */,
+				73C157092B898FEC009DA167 /* HomeScreen.swift in Sources */,
+				73FEA0C22B7D83D600E0CA77 /* DocumentListingView.swift in Sources */,
+				C5A9EB652B9EFAE700345BC1 /* CoreData.xcdatamodeld in Sources */,
+				73FEA0682B7C55DB00E0CA77 /* ReNoteAIApp.swift in Sources */,
+				73C156992B85C77E009DA167 /* CustomBackButton.swift in Sources */,
+				73FEA0C02B7CF66300E0CA77 /* DocumentDetailView.swift in Sources */,
+				C5E48E7A2B96E41D005F4B59 /* Tag.swift in Sources */,
+				73C1569C2B85C7CA009DA167 /* Theme.swift in Sources */,
+				C5E48E7C2B973B35005F4B59 /* PDFPreview.swift in Sources */,
+				73C156A22B85C872009DA167 /* OTPTimerView.swift in Sources */,
+				C58445032B8DAD5C0061494B /* QrView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		73FEA0722B7C55E600E0CA77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		73FEA0732B7C55E600E0CA77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		73FEA0752B7C55E600E0CA77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FADEA7A9DFBE9FF9D43513F /* Pods-ReNoteAI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ReNoteAI/Preview Content\"";
+				DEVELOPMENT_TEAM = 5UUZHRGMDL;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReNoteAI/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReNoteAI.ReNoteAI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		73FEA0762B7C55E600E0CA77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68EF319A4BD0136F1EA2E693 /* Pods-ReNoteAI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ReNoteAI/Preview Content\"";
+				DEVELOPMENT_TEAM = 5UUZHRGMDL;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReNoteAI/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReNoteAI.ReNoteAI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		73FEA05F2B7C55DB00E0CA77 /* Build configuration list for PBXProject "ReNoteAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73FEA0722B7C55E600E0CA77 /* Debug */,
+				73FEA0732B7C55E600E0CA77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		73FEA0742B7C55E600E0CA77 /* Build configuration list for PBXNativeTarget "ReNoteAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73FEA0752B7C55E600E0CA77 /* Debug */,
+				73FEA0762B7C55E600E0CA77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		73C156F92B8976F7009DA167 /* XCRemoteSwiftPackageReference "swift-google-drive-client" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/darrarski/swift-google-drive-client.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		73C156FE2B897897009DA167 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		73C156FA2B8976F7009DA167 /* GoogleDriveClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73C156F92B8976F7009DA167 /* XCRemoteSwiftPackageReference "swift-google-drive-client" */;
+			productName = GoogleDriveClient;
+		};
+		73C156FF2B897897009DA167 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73C156FE2B897897009DA167 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		73C157012B897897009DA167 /* DependenciesMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 73C156FE2B897897009DA167 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = DependenciesMacros;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C5A9EB632B9EFAE700345BC1 /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C5A9EB642B9EFAE700345BC1 /* CoreData.xcdatamodel */,
+			);
+			currentVersion = C5A9EB642B9EFAE700345BC1 /* CoreData.xcdatamodel */;
+			path = CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 73FEA05C2B7C55DB00E0CA77 /* Project object */;
+}

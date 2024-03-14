@@ -1,0 +1,55 @@
+{
+  "tags": [
+    "": {
+      "id": "",
+      "tagName": ""
+    },
+  ],
+  "folders": [
+    {
+      "id": "",
+      "name": "",
+      "createdDate": ,
+      "updatedDate": ,
+      "emailOrPhone": "",
+      "isSynced": false,
+      "isPin": false,
+      "isFavourite": false,
+      "fileCount": ,
+      "driveType": "Google"
+    },
+  ],
+  "documents": [
+    {
+      "id": "",
+      "name": "",
+      "createdDate": ,
+      "updatedDate": ,
+      "folderId": "",
+      "isSynced": false,
+      "isPin": false,
+      "isFavourite": false,
+      "fileCount": ,
+      "driveType": "Google"
+    },
+  ],
+  "Files": [
+    {
+      "id": "",
+      "name": "",
+      "createdDate": ,
+      "updatedDate": ,
+      "fileData": "",
+      "isSynced": false,
+      "isPin": false,
+      "isFavourite": false,
+      "DocumentId": "",
+      "openCount": ,
+      "localFilePathIos": "",
+      "localFilePathAndroid": "",
+      "tagId": "",
+      "driveType": "Google",
+      "fileExtension": "jpg"
+    },
+  ]
+}
