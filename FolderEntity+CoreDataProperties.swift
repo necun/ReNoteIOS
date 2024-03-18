@@ -2,7 +2,7 @@
 //  FolderEntity+CoreDataProperties.swift
 //  
 //
-//  Created by Siddanathi Rohith on 12/03/24.
+//  Created by Siddanathi Rohith on 18/03/24.
 //
 //
 
@@ -25,6 +25,7 @@ extension FolderEntity {
     @NSManaged public var isSyced: Bool
     @NSManaged public var name: String?
     @NSManaged public var updatedDate: Date?
+    @NSManaged public var googleId: String?
     @NSManaged public var document: NSSet?
 
 }

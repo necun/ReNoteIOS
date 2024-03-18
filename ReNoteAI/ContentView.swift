@@ -50,9 +50,6 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingImportScreen) {
                 ImportScreen(
-                    onSaveFolder: { folder in
-                        // Your code to handle folder selection
-                    },
                     scannedImages: $scannedImages,
                     dataBaseManager: DataBaseManager.shared
                 )

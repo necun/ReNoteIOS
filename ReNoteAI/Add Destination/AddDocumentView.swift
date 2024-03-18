@@ -75,10 +75,14 @@ struct AddDocumentView: View {
  
     @State private var showActionSheet = false
     @State private var showFoldersListScreen = false
-    @State private var selectedFolder:Folder?
+    @State private var selectedFolder: FolderEntity?
     @State private var selectedUIImage: UIImage? = nil
     @State private var scannedImages: [UIImage] = []
     @State private var showDocumentScanner = false
+    
+    
+    @Environment(\.managedObjectContext) private var viewContext
+
  
  
  
@@ -216,14 +220,12 @@ struct AddDocumentView: View {
                 
                 NavigationLink(
                     destination: ImportScreen(
-                        onSaveFolder: { folder in
+                        scannedImages: $scannedImages, dataBaseManager: DataBaseManager.shared, onSaveFolder: { folder in
                             // Your code here
                             print("Selected folder is", folder.name)
                             self.saveSelectedFolder(folder: folder)
                             self.showFoldersListScreen = false
-                        },
-                        scannedImages: $scannedImages,
-                        dataBaseManager: DataBaseManager.shared // Assuming DataBaseManager is a singleton
+                        } // Assuming DataBaseManager is a singleton
                     ),
                     isActive: $showFoldersListScreen
                 ) {
@@ -285,9 +287,8 @@ struct AddDocumentView: View {
         }
  
     // Inside AddDocumentView
-    func saveSelectedFolder(folder:Folder) {
-        // Save or process the folder information as needed
-        selectedFolder = folder
+    func saveSelectedFolder(folder: FolderEntity) {
+        self.selectedFolder = folder
     }
 }
  

@@ -1,14 +1,27 @@
 import Dependencies
 import SwiftUI
 import GoogleDriveClient
-import SwiftData
+import CoreData
 import AuthenticationServices
 
 struct ProfileView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var users: [User]
-    @Query private var folders: [Folder]
-    @Query private var documents: [Document]
+    @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var dataBaseManager: DataBaseManager
+
+    @FetchRequest(
+           sortDescriptors: [NSSortDescriptor(keyPath: \UserEntity.email, ascending: true)],
+           animation: .default)
+       private var users: FetchedResults<UserEntity>
+       
+       @FetchRequest(
+           sortDescriptors: [NSSortDescriptor(keyPath: \FolderEntity.name, ascending: true)],
+           animation: .default)
+       private var folders: FetchedResults<FolderEntity>
+       
+       @FetchRequest(
+           sortDescriptors: [NSSortDescriptor(keyPath: \DocumentEntity.name, ascending: true)],
+           animation: .default)
+       private var documents: FetchedResults<DocumentEntity>
 
     @StateObject var googleAuthentication = GoogleAuthentication.shared
     @State private var isGoogleSignedIn:Bool = false
@@ -60,7 +73,7 @@ struct ProfileView: View {
                     
 //                    AppleAuthentication.shared.appleSignInButton
 //
-//                    
+//
 //                    HStack {
 //                        Line()
 //                        Text("OR")
@@ -109,15 +122,14 @@ struct ProfileView: View {
             googleAuthentication.onOpenURL(url: url)
 //            googleAuthentication.checkIsSignedIn()
             //get the list of files
-            //filter the files with folder 
+            //filter the files with folder
             
         }
         .onAppear() {
-            DataBaseManager.shared.modelContext = self.modelContext
-            DataBaseManager.shared.users = self.users
-            DataBaseManager.shared.folders = self.folders
-            DataBaseManager.shared.fetchDocumentsFromDatabase() // Adjusted call
-
+            DataBaseManager.shared.context = self.viewContext
+            DataBaseManager.shared.users = Array(self.users)
+            DataBaseManager.shared.refreshFolders()
+            DataBaseManager.shared.refreshDocuments()
             googleAuthentication.checkIsSignedIn()
             print("folders count is", folders)
         }
@@ -153,4 +165,3 @@ struct ProfileView_Previews: PreviewProvider {
         ProfileView()
     }
 }
-

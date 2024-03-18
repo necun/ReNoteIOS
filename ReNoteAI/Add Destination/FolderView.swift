@@ -1,41 +1,37 @@
 import SwiftUI
-import SwiftData
+import SwiftyDropbox
 import CoreData
  
  
 struct ImportScreen: View {
-    @Environment(\.modelContext) private var modelContext
-    var folders: [Folder] {
-        dataBaseManager.folders
-    }
-    var onSaveFolder: ((Folder) -> Void)
+    @Environment(\.managedObjectContext) private var viewContext
     
  
     @State private var isScannerPresented = false
     @Binding var scannedImages: [UIImage]
-
+    
+    var onDocumentsSaved: (() -> Void)?
     
     @ObservedObject var dataBaseManager = DataBaseManager.shared
-    @State private var sortOrder = SortDescriptor(\Folder.name)
     @State private var selectedFolderID: String?
     @State private var searchString = ""
     @State private var showingAddFolderAlert = false
        @State private var newFolderName = ""
     @State private var showingAddFolderModal = false
     @State private var showDocumentScanner = false
+    @State private var showDocumentListView = false
+    @State private var navigateToFolderDetails = false
+       @State private var selectedFolder: FolderEntity? = nil
  
  
     @Environment(\.presentationMode) var presentationMode
     
     @State private var selectedSegment = 0
        @State private var searchText = ""
+    var onSaveFolder: ((FolderEntity) -> Void)?
+    @State private var selectedDocument: DocumentEntity? = nil 
+
     
-    struct folder: Identifiable {
-        var id = UUID()
-        var name: String
-        // Add other properties you need
-    }
- 
     var body: some View {
            NavigationView {
                VStack {
@@ -69,34 +65,34 @@ struct ImportScreen: View {
                        // Inside your List in ImportScreen
                        // Inside your List in ImportScreen
                        List {
-                           ForEach(dataBaseManager.folders) { folder in
+                           ForEach(dataBaseManager.folders.filter {
+                                       searchText.isEmpty ? true : $0.name?.contains(searchText) ?? false
+                                   }, id: \.self) { folderEntity in
                                Button(action: {
                                    // Toggle selection
                                    withAnimation {
-                                       if selectedFolderID == folder.id {
-                                           // If this folder is already selected, deselect it
-                                           selectedFolderID = nil
-                                       } else {
-                                           // Otherwise, select this folder
-                                           selectedFolderID = folder.id
-                                       }
-                                   }
-                                   onSaveFolder(folder)
+                                              if selectedFolderID == folderEntity.id?.uuidString {
+                                                  // If this folder is already selected, deselect it
+                                                  selectedFolderID = nil
+                                              } else {
+                                                  // Otherwise, select this folder
+                                                  selectedFolderID = folderEntity.id?.uuidString
+                                              }
+                                          }
+                                          onSaveFolder?(folderEntity)
                                }) {
                                    HStack {
-                                       Text(folder.name)
-                                       Spacer()
-                                       if selectedFolderID == folder.id {
-                                           Image(systemName: "checkmark")
-                                               .foregroundColor(.blue)
-                                       }
-                                   }
-                               }
+                                                   Text(folderEntity.name ?? "")
+                                                   Spacer()
+                                                   if selectedFolderID == folderEntity.id?.uuidString {
+                                                       Image(systemName: "checkmark").foregroundColor(.blue)
+                                                   }
+                                               }                               }
                                .padding()
-                               .background(selectedFolderID == folder.id ? Color.blue.opacity(0.2) : Color.clear) // Change background based on selection
-                               .cornerRadius(5)
+                                           .background(selectedFolderID == folderEntity.id?.uuidString ? Color.blue.opacity(0.2) : Color.clear)
+                                           .cornerRadius(5)
                            }
-                           .onDelete(perform: deleteItems)
+                                              .onDelete(perform: deleteFolders)
                        }
  
  
@@ -138,6 +134,7 @@ struct ImportScreen: View {
                        Button(action: {
                            // Save images when completion is called
                            self.saveScannedImages()
+                           showDocumentListView = true
                        }) {
                                    Text("Save Here")
                                        .frame(height: 44)
@@ -157,6 +154,9 @@ struct ImportScreen: View {
                            .padding(.bottom, 20)
    //                        .environment(\.sizeCategory, .extraExtraLarge)
                }
+               .onAppear {
+                       dataBaseManager.refreshFolders() // Refresh the folders list when the view appears
+                   }
                .navigationTitle("Choose Folder")
                            .navigationBarItems(leading: Button(action: {
                                // Action for back navigation
@@ -177,35 +177,86 @@ struct ImportScreen: View {
                                            }
                                        }// Hide the default back button
                        }
-       }
+        // This approach requires SwiftUI 2.0 or later
+        if let selectedFolder = selectedFolder {
+                            NavigationLink(destination: FolderDetailsView(folder: selectedFolder), isActive: $navigateToFolderDetails) {
+                                EmptyView()
+                            }
+                            .hidden()
+                        }
+                    }
     
     private func saveScannedImages() {
-        for image in scannedImages {
-            guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-                print("Failed to convert one of the images to JPEG.")
-                continue
-            }
+        let newDocument = DocumentEntity(context: viewContext)
 
-            let documentName = "Scanned Image \(Date())"
-            print("Saving document named: \(documentName) with folderId: \(String(describing: selectedFolderID))")
-            dataBaseManager.saveDocument(name: documentName, fileData: imageData, folderId: selectedFolderID)
+        // Set the document's properties
+        newDocument.createdDate = Date()
+        newDocument.name = "Document \(Date())"
+        newDocument.id = UUID()
+
+        // Add the scanned images to the document
+        for image in scannedImages {
+            let imageData = ImageEntity(context: viewContext)
+            imageData.imageData = image.jpegData(compressionQuality: 1.0)
+            newDocument.addToImage(imageData) // Correct relationship method
         }
-        scannedImages.removeAll()
+
+        // Fetch and assign the folder if selectedFolderID is set
+        if let folderIdString = selectedFolderID, let folderId = UUID(uuidString: folderIdString) {
+            let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", folderId as CVarArg)
+
+            do {
+                let results = try viewContext.fetch(fetchRequest)
+                if let folder = results.first {
+                    newDocument.folder = folder // Correctly assigning the folder
+                }
+            } catch {
+                print("Error fetching folder: \(error)")
+            }
+        }
+
+        do {
+            try viewContext.save()
+            onDocumentsSaved?()
+            // Assuming you have a way to fetch the FolderEntity by its ID
+            if let folderId = UUID(uuidString: selectedFolderID ?? ""), let selectedFolder = fetchFolderById(folderId) {
+                self.selectedFolder = selectedFolder // Make sure you have a `@State` variable for `selectedFolder`
+                self.navigateToFolderDetails = true // Trigger navigation
+            }
+        } catch {
+            print("Error saving document: \(error)")
+        }
+
+        // Dismiss the screen or perform additional actions
         presentationMode.wrappedValue.dismiss()
     }
 
-       
-
-
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.forEach { index in
-                let folder = folders[index]
-                dataBaseManager.deleteFolder(folder)
+    private func fetchFolderById(_ id: UUID) -> FolderEntity? {
+            let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            do {
+                let results = try viewContext.fetch(fetchRequest)
+                return results.first
+            } catch {
+                print("Error fetching folder with ID \(id): \(error)")
+                return nil
             }
         }
-    }
+
+
+
+    private func deleteFolders(at offsets: IndexSet) {
+            withAnimation {
+                offsets.map { dataBaseManager.folders[$0] }.forEach(viewContext.delete)
+                do {
+                    try viewContext.save()
+                } catch {
+                    // Handle the error appropriately
+                    print("Deletion error: \(error)")
+                }
+            }
+        }
     
 //    func addNewFolder() async  {
 //        //google lo  create a new folder only when logged in with google
@@ -216,22 +267,14 @@ struct ImportScreen: View {
 //    }
 }
 extension DataBaseManager {
-    func deleteFolder(_ folder: Folder) {
-        guard let id = UUID(uuidString: folder.id) else { return }
-        let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-        
+    func deleteFolder(_ folderEntity: FolderEntity) {
+        context.delete(folderEntity)
         do {
-            let results = try context.fetch(fetchRequest)
-            if let folderEntity = results.first {
-                context.delete(folderEntity)
-                try context.save()
-                
-                // Optionally, refresh the folders to reflect this deletion in the UI
-                refreshFolders()
-            }
+            try context.save()
+            refreshFolders()
         } catch {
             print("Error deleting folder: \(error)")
         }
     }
 }
+

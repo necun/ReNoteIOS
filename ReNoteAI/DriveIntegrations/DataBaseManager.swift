@@ -1,16 +1,21 @@
 import Foundation
-import SwiftData
+import SwiftyDropbox
 import GoogleDriveClient
 import CoreData
 
-//
+
+
 struct PersistenceController {
     static let shared = PersistenceController()
 
     let container: NSPersistentContainer
+    
 
-    init() {
-        container = NSPersistentContainer(name: "CoreData") // Replace "YourModelName" with the name of your Core Data model file (without the extension)
+    init(inMemory: Bool = false) {
+        container = NSPersistentContainer(name: "CoreData")
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -19,24 +24,35 @@ struct PersistenceController {
     }
 }
 
+
+
+
  
  
 class DataBaseManager: ObservableObject {
     
-    static let shared = DataBaseManager()
+    static let shared = DataBaseManager(context: PersistenceController.shared.container.viewContext)
     @Published var isSignedIn: Bool = false
     @Published var mainFolderID: String?
     
-    var context: NSManagedObjectContext {
-            return PersistenceController.shared.container.viewContext
+    var context: NSManagedObjectContext
+    
+    init(context: NSManagedObjectContext) {
+            self.context = context
         }
+
     
-    var users: [User] = []
-    @Published var folders: [Folder] = []
-    @Published var documents: [Document] = []
-    @Published var tags: [Tag] = []
+    var users: [UserEntity] = []
+        @Published var folders: [FolderEntity] = []
+        @Published var documents: [DocumentEntity] = []
+        @Published var tags: [TagEntity] = []
     
-    var modelContext: ModelContext?
+    enum StoragePlace: String {
+        case Google = "Google"
+        // Add other cases as necessary
+    }
+
+    
     
 //    init() {
 //           loadTags()
@@ -119,90 +135,118 @@ class DataBaseManager: ObservableObject {
     
     
     
-    func saveUserInfo() {
-        // Assuming 'email' is the unique identifier for each user
-        let userEmail = "user@example.com" // This should be obtained from the Google sign-in process
+    func saveUserInfo(email: String, userType: String, mainFolderID: String) {
+        let newUser = UserEntity(context: self.context)
+        newUser.email = email
         
-        // Check if the user already exists
-        if !users.contains(where: { $0.userType == StoragePlace.Google.rawValue }) {
-            // If the user is new, create and insert the user
-            let newUser = User(name: "Name", email: userEmail, userType: StoragePlace.Google.rawValue, accessToken: "", accessTokenExpirationDate: Date.now, refreshToken: "", refreshTokenExpirationDate: Date.now, idToken: "", idTokenExpirationDate: Date.now, mainFolderID: "")
+        do {
+            try self.context.save()
             
-            // Insert the new user into the database or your data structure
-            modelContext?.insert(newUser)
+            // After successfully saving the user, store the userType and mainFolderID in UserDefaults
+            UserDefaults.standard.set(userType, forKey: "userType-\(email)")
+            UserDefaults.standard.set(mainFolderID, forKey: "mainFolderID-\(email)")
             
-            // If you're using a SwiftUI view, and `users` is observed, it should automatically update.
-            // Otherwise, you might need to manually fetch or update the list to include the new user.
-        } else {
-            // User already exists, you can update the user's info if needed
-            // This might involve fetching the user from `users` and updating their details
-            
-            //TODO update the local user
-            
+        } catch {
+            print("Failed to save user info: \(error)")
+        }
+    }
+
+    func storeMainFolderID(fileID: String) {
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        // Assuming `userType` is the correct attribute name in your model
+        fetchRequest.predicate = NSPredicate(format: "userType == %@", StoragePlace.Google.rawValue)
+        
+        do {
+            let filteredUsers = try context.fetch(fetchRequest)
+            if let googleUser = filteredUsers.first {
+                // Assuming here you have the logic to set `mainFolderID` for `googleUser`
+                // Since you mentioned not updating CoreData, remember to update the approach based on your context
+            }
+        } catch {
+            print("Error fetching users: \(error)")
         }
     }
     
-    func storeMainFolderID(fileID:String) {
-        let users = users.filter({
-            $0.userType == StoragePlace.Google.rawValue
-        })
-        
-        if (users.count > 0) {
-            let googleUser = users[0]
-            googleUser.mainFolderID = fileID
+    func fetchUserWithType(_ type: String) -> [UserEntity] {
+        let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "userType == %@", type)
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("Error fetching users with type \(type): \(error)")
+            return []
         }
-        
     }
+
     
     
     func getMainFolderID() -> String? {
         self.mainFolderID
     }
     
-    func createSubFolder(name: String) {
-            // Create local folder first
-            let newFolder = Folder(id: UUID().uuidString, name: name, updatedDate: Date.now, createdDate: Date.now, isSyced: false, isFavourite: false, isPin: false, driveType: StoragePlace.Google.rawValue, fileCount: 0)
+    func createSubFolder(name: String, driveType: String) {
+            let newFolder = FolderEntity(context: self.context)
+            newFolder.id = UUID()
+            newFolder.name = name
+            newFolder.driveType = driveType
+            newFolder.updatedDate = Date()
+            newFolder.createdDate = Date()
+            newFolder.isSyced = false
+            newFolder.isFavourite = false
+            newFolder.isPin = false
+            newFolder.fileCount = 0
             
-            // Insert newFolder into your local database
-            // For example, you might save it to Core Data or another local storage solution.
-            // This example directly adds it to an array for simplicity.
-            self.folders.append(newFolder)
-
-            // If the user is signed in to Google Drive, also create the folder on Google Drive
-            if GoogleAuthentication.shared.isSignedIn, let mainFolderID = self.mainFolderID {
-                Task {
-                    await GoogleAuthentication.shared.createFolderInDrive(name: name, parentFolderID: mainFolderID)
-                }
+            do {
+                try self.context.save()
+            } catch {
+                print("Failed to save the folder: \(error)")
             }
         }
-    func updateFoldersInLocalDB(folderInputs:[String:Any]) {
-        for eachKey in folderInputs.keys {
-            if !self.folders.contains(where: { $0.id ==  eachKey as String  }) {
-                if let eachFolder = folderInputs[eachKey] as? [String: Any] {
-                    // Assuming you have a way to parse eachFolder dictionary to your Folder model
-                    let createdDate = Date(timeIntervalSince1970: eachFolder["createdDate"] as! TimeInterval )
-                    let updatedDate = Date(timeIntervalSince1970: eachFolder["updatedDate"] as! TimeInterval )
-                    
-                    let f = Folder(
-                        id: eachFolder["id"] as? String ?? "",
-                        name: eachFolder["name"] as? String ?? "",
-                        updatedDate: updatedDate,
-                        createdDate: createdDate,
-                        isSyced: eachFolder["isSynced"] as? Bool ?? true,
-                        isFavourite: eachFolder["isFavourite"] as? Bool ?? false,
-                        isPin: eachFolder["isPin"] as? Bool ?? false,
-                        driveType: eachFolder["driveType"] as? String ?? "",
-                        fileCount: eachFolder["fileCount"] as? Int ?? 0
-                    )
-                    modelContext?.insert(f)
+
+
+    func updateFoldersInLocalDB(folderInputs: [String: Any]) {
+        for (folderIDString, folderInfo) in folderInputs {
+            guard let folderDict = folderInfo as? [String: Any],
+                  let id = UUID(uuidString: folderIDString),
+                  let name = folderDict["name"] as? String,
+                  let updatedDate = folderDict["updatedDate"] as? Date,
+                  let createdDate = folderDict["createdDate"] as? Date,
+                  let isSynced = folderDict["isSynced"] as? Bool,
+                  let isFavourite = folderDict["isFavourite"] as? Bool,
+                  let isPin = folderDict["isPin"] as? Bool,
+                  let driveType = folderDict["driveType"] as? String,
+                  let fileCount = folderDict["fileCount"] as? Int64 else { continue }
+
+            let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            
+            do {
+                let results = try context.fetch(fetchRequest)
+                let folderEntity: FolderEntity
+                if let existingFolder = results.first {
+                    folderEntity = existingFolder
+                } else {
+                    folderEntity = FolderEntity(context: context)
+                    folderEntity.id = id
                 }
-            }
-            else {
-                //TODO
-                // update the folder
+                
+                folderEntity.name = name
+                folderEntity.updatedDate = updatedDate
+                folderEntity.createdDate = createdDate
+                folderEntity.isSyced = isSynced
+                folderEntity.isFavourite = isFavourite
+                folderEntity.isPin = isPin
+                folderEntity.driveType = driveType
+                folderEntity.fileCount = fileCount
+                
+                try context.save()
+            } catch {
+                print("Failed to update or create folder: \(error)")
             }
         }
     }
+
+
     
     
     
@@ -269,39 +313,47 @@ class DataBaseManager: ObservableObject {
     
     
     
-    func updateDocumentsInLocalDB(documentsFromCloud:[String:Any]) {
-        for eachKey in documentsFromCloud.keys{
-            if !documents.contains(where: { $0.id ==  eachKey as String  }) {
-                if let eachDocument = documentsFromCloud[eachKey] as? [String: Any] {
-                    // Assuming you have a way to parse eachFolder dictionary to your Folder model
-                    let createdDate = Date(timeIntervalSince1970: eachDocument["createdDate"] as! TimeInterval )
-                    let updatedDate = Date(timeIntervalSince1970: eachDocument["updatedDate"] as! TimeInterval )
-                    
-                    let d = Document.init(
-                        id: eachDocument["id"] as? String ?? "",
-                        name: eachDocument["name"] as? String ?? "",
-                        createdDate: createdDate,
-                        updatedDate: updatedDate,
-                        fileData: eachDocument["fileData"] as? Data ?? Data(),
-                        isSynced: eachDocument["isSynced"] as? Bool ?? true,
-                        isPin: eachDocument["isPin"] as? Bool ?? true,
-                        isFavourite: eachDocument["isFavourite"] as? Bool ?? true,
-                        folderId: eachDocument["folderId"] as? String ?? "",
-                        tagId: eachDocument["tagId"] as? String ?? "",
-                        openCount: eachDocument["openCount"] as? Int ?? 0,
-                        localFilePathIos: eachDocument["localFilePathIos"] as? String ?? "",
-                        localFilePathAndroid: eachDocument["localFilePathAndroid"] as? String ?? "",
-                        driveType: eachDocument["driveType"] as? String ?? "",
-                        fileExtension: eachDocument["fileExtension"] as? String ?? ""
-                    )
-                    modelContext?.insert(d)
+     func updateDocumentsInLocalDB(documentsFromCloud: [String: Any]) {
+        for (documentIDString, documentInfo) in documentsFromCloud {
+            guard let documentDict = documentInfo as? [String: Any],
+                  let id = UUID(uuidString: documentIDString),
+                  let name = documentDict["name"] as? String,
+                  let createdDate = documentDict["createdDate"] as? Date,
+                  let updatedDate = documentDict["updatedDate"] as? Date,
+                  let isSynced = documentDict["isSynced"] as? Bool,
+                  let isPin = documentDict["isPin"] as? Bool,
+                  let isFavourite = documentDict["isFavourite"] as? Bool,
+                  let driveType = documentDict["driveType"] as? String else { continue }
+
+            let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+
+            do {
+                let results = try context.fetch(fetchRequest)
+                let documentEntity: DocumentEntity
+
+                if let existingDocument = results.first {
+                    documentEntity = existingDocument
+                } else {
+                    documentEntity = DocumentEntity(context: context)
+                    documentEntity.id = id
                 }
-            }
-            else {
-                //TODO Update document
+
+                documentEntity.name = name
+                documentEntity.createdDate = createdDate
+                documentEntity.updatedDate = updatedDate
+                documentEntity.isSynced = isSynced
+                documentEntity.isPin = isPin
+                documentEntity.isFavourite = isFavourite
+                documentEntity.driveType = driveType
+
+                try context.save()
+            } catch {
+                print("Failed to update or create document: \(error)")
             }
         }
     }
+
     
 }
 extension DataBaseManager {
@@ -347,102 +399,73 @@ extension DataBaseManager {
         do {
             let fetchedFolders = try context.fetch(fetchRequest)
             DispatchQueue.main.async {
-                self.folders = fetchedFolders.map { Folder(id: $0.id?.uuidString ?? UUID().uuidString, // Convert UUID to String
-                                                           name: $0.name ?? "",
-                                                           updatedDate: $0.updatedDate ?? Date(),
-                                                           createdDate: $0.createdDate ?? Date(),
-                                                           isSyced: $0.isSyced,
-                                                           isFavourite: $0.isFavourite,
-                                                           isPin: $0.isPin,
-                                                           driveType: $0.driveType ?? "",
-                                                           fileCount: Int($0.fileCount)) }
+                // Directly assign the fetched FolderEntity objects to self.folders
+                self.folders = fetchedFolders
             }
         } catch {
             print("Failed to fetch folders: \(error)")
         }
     }
-
 }
 
 extension DataBaseManager {
-    func saveDocument(name: String, fileData: Data, folderId: String? = nil) {
+    func saveDocument(name: String, fileData: Data, folderId: UUID?) {
         print("Saving document with name: \(name), folderId: \(String(describing: folderId))")
         let newDocument = DocumentEntity(context: context)
         newDocument.id = UUID()
         newDocument.name = name
         newDocument.createdDate = Date()
         newDocument.updatedDate = Date()
-        newDocument.fileData = fileData
         
         // Default properties
         newDocument.isSynced = false
         newDocument.isPin = false
         newDocument.isFavourite = false
-        newDocument.openCount = 0
-        newDocument.localFilePathIos = nil
-        newDocument.localFilePathAndroid = nil
         newDocument.driveType = nil
-        newDocument.fileExtension = "jpg"
-        //        newDocument.folderId = UUID()
-        newDocument.tagId = nil
         
         // Set folder if ID is provided
-        if let folderIdUnwrapped = folderId, let uuid = UUID(uuidString: folderIdUnwrapped) {
-            newDocument.folderId = uuid
-            newDocument.folder = fetchFolder(by: uuid)
-        }
-        
         do {
-            try context.save()
-            print("Document saved successfully: Name = \(name), ID = \(newDocument.id?.uuidString ?? "N/A")")
-            refreshDocuments() // Refresh the documents array
-        } catch {
-            print("Failed to save document: \(error)")
-        }
+                    try context.save()
+                    print("Document saved successfully.")
+                    refreshDocuments()
+                } catch {
+                    print("Failed to save document: \(error.localizedDescription)")
+                }
     }
+    
+    // Ensure this method exists within DataBaseManager
+
+
+        func findFolderByID(_ id: UUID) -> FolderEntity? {
+            let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+            do {
+                let results = try context.fetch(fetchRequest)
+                return results.first // Return the first found folder, if any
+            } catch {
+                print("Error fetching folder with ID \(id): \(error)")
+                return nil
+            }
+        }
+    
+
+
     
     
     
     func refreshDocuments() {
         let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
+        // You might want to specify sort descriptors or predicates here
         do {
-            let fetchedDocuments = try context.fetch(fetchRequest)
-            DispatchQueue.main.async {
-                self.documents = fetchedDocuments.compactMap { entity in
-                    // Ensure all required fields are non-nil before initialization
-                    guard let id = entity.id,
-                          let name = entity.name,
-                          let createdDate = entity.createdDate,
-                          let updatedDate = entity.updatedDate,
-                          let fileData = entity.fileData,
-                          let fileExtension = entity.fileExtension else {
-                        print("Skipping a document due to missing required fields.")
-                        return nil
-                    }
-                    
-                    return Document(
-                        id: id.uuidString,
-                        name: name,
-                        createdDate: createdDate,
-                        updatedDate: updatedDate,
-                        fileData: fileData,
-                        isSynced: entity.isSynced,
-                        isPin: entity.isPin,
-                        isFavourite: entity.isFavourite,
-                        folderId: entity.folderId?.uuidString ?? "",
-                        tagId: entity.tagId ?? "",
-                        openCount: Int(entity.openCount),
-                        localFilePathIos: entity.localFilePathIos ?? "",
-                        localFilePathAndroid: entity.localFilePathAndroid ?? "",
-                        driveType: entity.driveType ?? StoragePlace.Local.rawValue, // Default to 'Local' if nil
-                        fileExtension: fileExtension
-                    )
-                }
-            }
-        } catch {
-            print("Failed to fetch documents: \(error)")
+            self.documents = try context.fetch(fetchRequest)
+            print("Fetched \(self.documents.count) documents.")
+        } catch let error as NSError {
+            print("Could not fetch documents: \(error), \(error.userInfo)")
         }
     }
+
+
+
     
     private func fetchFolder(by id: UUID) -> FolderEntity? {
         let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
@@ -456,41 +479,46 @@ extension DataBaseManager {
         }
     }
     
-    func fetchDocumentsFromDatabase() {
-        let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
-        
+func fetchDocumentsFromDatabase(completion: @escaping ([DocumentEntity]) -> Void) {
+    let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
+    // Add sort descriptors or predicates if needed
+    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \DocumentEntity.createdDate, ascending: false)]
+
+    do {
+        let fetchedDocuments = try context.fetch(fetchRequest)
+        completion(fetchedDocuments)
+    } catch {
+        print("Failed to fetch documents: \(error)")
+        completion([])
+    }
+}
+
+
+}
+extension DataBaseManager {
+    func updateFolderWithDriveID(for folder: FolderEntity, with driveFolderID: String) {
+        folder.googleId = driveFolderID
+        folder.isSyced = true
         do {
-            let fetchedDocuments = try context.fetch(fetchRequest)
-            DispatchQueue.main.async {
-                self.documents = fetchedDocuments.compactMap { entity in
-                    guard let id = entity.id, let name = entity.name, let createdDate = entity.createdDate, let updatedDate = entity.updatedDate, let fileData = entity.fileData, let fileExtension = entity.fileExtension else {
-                        print("Skipping a document due to missing required fields.")
-                        return nil
-                    }
-                    return Document(
-                        id: id.uuidString,
-                        name: name,
-                        createdDate: createdDate,
-                        updatedDate: updatedDate,
-                        fileData: fileData,
-                        isSynced: entity.isSynced,
-                        isPin: entity.isPin,
-                        isFavourite: entity.isFavourite,
-                        folderId: entity.folderId?.uuidString ?? "",
-                        tagId: entity.tagId ?? "",
-                        openCount: Int(entity.openCount),
-                        localFilePathIos: entity.localFilePathIos ?? "",
-                        localFilePathAndroid: entity.localFilePathAndroid ?? "",
-                        driveType: entity.driveType ?? StoragePlace.Local.rawValue,
-                        fileExtension: fileExtension
-                    )
-                }
-            }
+            try context.save()
+            print("Folder updated with Google Drive ID successfully.")
         } catch {
-            print("Failed to fetch documents: \(error)")
+            print("Failed to update folder with Google Drive ID: \(error.localizedDescription)")
+        }
+    }
+
+    func fetchDocumentsForFolder(_ folder: FolderEntity) -> [DocumentEntity] {
+        let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "folder == %@", folder)
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("Error fetching documents for folder: \(error.localizedDescription)")
+            return []
         }
     }
 }
+
 
 
 

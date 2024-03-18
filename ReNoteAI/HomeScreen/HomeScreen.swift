@@ -1,5 +1,6 @@
 import SwiftUI
-import SwiftData
+import SwiftyDropbox
+import CoreData
  
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
@@ -16,21 +17,36 @@ extension View {
         clipShape(RoundedCorner(radius: radius, corners: corners) )
     }
 }
+
+
  
 struct HomeScreen: View {
+    
+    
     @Environment(\.modelContext) private var modelContext
     @State var showBannerView: Bool = true
     @ObservedObject var dataBaseManager = DataBaseManager.shared
- 
     
-    @State private var path = [Document]()
-    @State private var sortOrderForDocuments = SortDescriptor(\Document.name)
-    @State private var sortOrderForFolders = SortDescriptor(\Folder.name)
     
     @State private var searchString = ""
-    @Query private var users: [User]
-    @Query private var folders: [Folder]
-    @Query private var documents: [Document]
+    @FetchRequest(
+           sortDescriptors: [NSSortDescriptor(keyPath: \UserEntity.email, ascending: true)],
+           animation: .default)
+       private var users: FetchedResults<UserEntity>
+       
+       @FetchRequest(
+           sortDescriptors: [NSSortDescriptor(keyPath: \FolderEntity.name, ascending: true)],
+           animation: .default)
+       private var folders: FetchedResults<FolderEntity>
+       
+    @FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \DocumentEntity.createdDate, ascending: false)],
+            animation: .default)
+        private var documents: FetchedResults<DocumentEntity>
+    
+    
+    @State private var selectedDocument: DocumentEntity? = nil
+       @State private var showDocumentListView: Bool = false
     @State private var isSearchActive = false
     @State private var sortAscending = true
     @State private var showAddDocumentView = false
@@ -38,9 +54,14 @@ struct HomeScreen: View {
     @State private var selectedTag: String? = "All"
     @State private var showAddNewTagView = false
     @State private var showAddNewFolderView = false
+    @State private var path: [AnyHashable] = []
+    let sortOrderForFolders = NSSortDescriptor(keyPath: \FolderEntity.name, ascending: true)
+
  
     @State private var schemaTags: [String] = []
     let transitionAnimation: Animation = .easeInOut(duration: 0.5)
+    
+    
     
     
     var body: some View {
@@ -153,23 +174,134 @@ struct HomeScreen: View {
                 }
             }
             
-            if dataBaseManager.folders.isEmpty&&dataBaseManager.documents.isEmpty {
-                    EmptyFilesView()
-                  }
+//            if dataBaseManager.folders.isEmpty&&dataBaseManager.documents.isEmpty {
+//                    EmptyFilesView()
+//                  }
            
-            FoldersListView(dataBaseManager: DataBaseManager.shared, sort: sortOrderForFolders, searchString: searchString)
+            FoldersListView(sort: sortOrderForFolders, searchString: searchString)
                 .onAppear {
                     dataBaseManager.refreshFolders()
                 }
+
  
  
             
             
-            DocumentListingView()
-                .onAppear {
-                    dataBaseManager.refreshDocuments() // This ensures documents are loaded when the view appears
+//            DocumentListingView(dataBaseManager: dataBaseManager)
+//                            .onAppear {
+//                                dataBaseManager.refreshDocuments()
+//                            }
+             
+            ScrollView(.vertical){
+                ForEach(documents) { document in
+                    NavigationLink(destination: MultiImageDisplayView(document: document), isActive: .constant(false)) {
+                                           DocumentCellView(document: document)
+                                       }
+//                        ZStack {
+//                            RoundedRectangle(cornerRadius: 12)
+//                                .fill(Color.gray.opacity(0.05)) // Background color of the rectangle
+//                                .shadow(radius: 10, x: 10, y: 10) // Slight shadow for depth
+//                            HStack(spacing: 12) {
+//                                Image("Thumbnail1") // Replace with appropriate icons
+//                                    .resizable()
+//                                    .frame(width: 66, height: 62)
+//                                
+//                                Text(document.name ?? "")
+//                                    .font(.footnote)
+//                                
+//                                // NavigationLink aligned beside the image
+//                                //                            NavigationLink(destination: DocumentDetailView(document: document)) {
+//                                //                                DocumentListView(document: document)
+//                                //                            }
+//                                
+//                                    .frame(alignment: .leading)
+//                                
+//                                
+//                                Spacer()
+//                                
+//                                VStack{
+//                                    HStack(spacing: 15) {
+//                                        Button(action: {
+//                                            // Favorite action
+//                                        }) {
+//                                            Image("Pin") // Favorite (pin) icon
+//                                                .foregroundColor(.gray)
+//                                        }
+//                                        
+//                                        Button(action: {
+//                                            // More options action
+//                                        }) {
+//                                            Image("Share") // Use systemName for sharing icon
+//                                                .foregroundColor(.gray)
+//                                        }
+//                                    }
+//                                    .imageScale(.large)
+//                                    .frame(maxWidth: .infinity, alignment: .trailing)
+//                                    
+//                                    Spacer()
+//                                    
+//                                    HStack {
+//                                        // Then, add the "Personal" text below the buttons HStack
+//                                        Text("Personal")
+//                                            .font(.caption) // Customize the font as needed
+//                                        
+//                                    }
+//                                    .frame(maxWidth: .infinity, alignment: .trailing)
+//                                    
+//                                    
+//                                    // Additional modifiers for the VStack can be placed here if needed
+//                                    
+//                                    Spacer()
+//                                    
+//                                    // Aligns buttons to the right
+//                                    HStack(spacing : 17) {
+//                                        Button(action: {
+//                                            // Sync action
+//                                        }) {
+//                                            Image("Cloud1") // Sync icon
+//                                                .foregroundColor(.blue)
+//                                        }
+//                                        
+//                                        Button(action: {
+//                                            // Favorite action
+//                                        }) {
+//                                            Image(systemName: "star") // Favorite icon
+//                                                .foregroundColor(.gray)
+//                                        }
+//                                        
+//                                        HStack(alignment: .lastTextBaseline){
+//                                            Menu {
+//                                                Button("Rename", action: { /* sorting by name */ })
+//                                                Button("Update", action: { /* sorting by date created */ })
+//                                                Divider()
+//                                                Button("Delete", action: { /* sorting by date modified */ })
+//                                                    .foregroundColor(.red)
+//                                            } label: {
+//                                                Image("Options")
+//                                                    .foregroundColor(.gray)
+//                                            }
+//                                        }
+//                                    }
+//                                    .imageScale(.medium)
+//                                    .frame(maxWidth: .infinity, alignment: .trailing)
+//                                    
+//                                }
+//                                .padding()
+//                                
+//                            }
+//                            .padding(.horizontal, 12)
+//                            
+//                            // Add padding inside HStack for better spacing
+//                        }
+//                        .padding(.horizontal)
+//                        .frame(maxWidth: .infinity,maxHeight: 180)
                 }
-            
+                .onAppear {
+                    dataBaseManager.refreshDocuments() // Make sure this method exists and updates the documents
+                }
+            }
+
+
             
                            
 
@@ -259,7 +391,108 @@ struct HomeScreen: View {
 //        }
 //    }
  
-    
+    func DocumentCellView(document: DocumentEntity) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.gray.opacity(0.05)) // Background color of the rectangle
+                .shadow(radius: 10, x: 10, y: 10) // Slight shadow for depth
+            HStack(spacing: 12) {
+                Image("Thumbnail1") // Replace with appropriate icons
+                    .resizable()
+                    .frame(width: 66, height: 62)
+                
+                Text(document.name ?? "")
+                    .font(.footnote)
+                
+                // NavigationLink aligned beside the image
+                //                            NavigationLink(destination: DocumentDetailView(document: document)) {
+                //                                DocumentListView(document: document)
+                //                            }
+                
+                    .frame(alignment: .leading)
+                
+                
+                Spacer()
+                
+                VStack{
+                    HStack(spacing: 15) {
+                        Button(action: {
+                            // Favorite action
+                        }) {
+                            Image("Pin") // Favorite (pin) icon
+                                .foregroundColor(.gray)
+                        }
+                        
+                        Button(action: {
+                            // More options action
+                        }) {
+                            Image("Share") // Use systemName for sharing icon
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .imageScale(.large)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    
+                    Spacer()
+                    
+                    HStack {
+                        // Then, add the "Personal" text below the buttons HStack
+                        Text("Personal")
+                            .font(.caption) // Customize the font as needed
+                        
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    
+                    
+                    // Additional modifiers for the VStack can be placed here if needed
+                    
+                    Spacer()
+                    
+                    // Aligns buttons to the right
+                    HStack(spacing : 17) {
+                        Button(action: {
+                            // Sync action
+                        }) {
+                            Image("Cloud1") // Sync icon
+                                .foregroundColor(.blue)
+                        }
+                        
+                        Button(action: {
+                            // Favorite action
+                        }) {
+                            Image(systemName: "star") // Favorite icon
+                                .foregroundColor(.gray)
+                        }
+                        
+                        HStack(alignment: .lastTextBaseline){
+                            Menu {
+                                Button("Rename", action: { /* sorting by name */ })
+                                Button("Update", action: { /* sorting by date created */ })
+                                Divider()
+                                Button("Delete", action: { /* sorting by date modified */ })
+                                    .foregroundColor(.red)
+                            } label: {
+                                Image("Options")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    .imageScale(.medium)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    
+                }
+                .padding()
+                
+            }
+            .padding(.horizontal, 12)
+            
+            // Add padding inside HStack for better spacing
+        }
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity,maxHeight: 180)
+    }
+        
+        
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -278,6 +511,7 @@ struct HomeScreen: View {
         }
     }
 }
+
  
 struct MyDetent: CustomPresentationDetent {
     // 1

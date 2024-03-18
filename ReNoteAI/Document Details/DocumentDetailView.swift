@@ -1,47 +1,40 @@
-//
-//  ContentView.swift
-//  ReNoteAI
-//
-//  Created by Sravan Kumar Kandukuru on 14/02/24.
-//
-
 import SwiftUI
-import SwiftData
+import CoreData
 
-struct DocumentDetailsViewExtention: View {
-    @Bindable var document: Document
+struct MultiImageDisplayView: View {
+    let document: DocumentEntity
 
     var body: some View {
-        Form() {
-            TextField("Name", text: $document.name)
-                .onChange(of: document.name) { oldValue, newValue in
-                    document.updatedDate = Date.now
-                    document.isSynced = false
+        ScrollView {
+            VStack {
+                ForEach(document.imagesArray, id: \.self) { imageEntity in
+                    if let imageData = imageEntity.imageData, let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                    }
                 }
+            }
         }
     }
 }
 
-struct DocumentDetailView: View {
-    @Bindable var document: Document
-   
-    var body: some View {
-        DocumentDetailsViewExtention(document: document)
+extension DocumentEntity {
+    var imagesArray: [ImageEntity] {
+        // Assuming 'images' is the correct relationship name
+        let set = self.image as? Set<ImageEntity> ?? []
+        return Array(set).sorted { $0.createdDate ?? Date() < $1.createdDate ?? Date() }
     }
 }
 
-//#Preview {
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        let container = try ModelContainer(for: Document.self, configurations: config)
-//        let folder = Folder.init(id: "", name: "", updatedDate: Date.now, createdDate: Date.now, isSyced: false, isFavourite: true, isPin: true, driveType: StoragePlace.Google.rawValue, fileCount: 10)
-//        
-//        let example = Document(id: "", name: "", createdDate: Date.now, updatedDate: Date.now, fileData: Data(), isSynced: true, isPin: false, isFavourite: false, folderId: "", tagId: "", openCount: 0, localFilePathIos: "", localFilePathAndroid: "", driveType: "", fileExtension: "");
-//        return DocumentDetailView(document: example).modelContainer(container)
-//    }
-//    catch{
-//        fatalError("Failed to create")
-//    }
-//    
-//}
 
+
+//struct DocumentSummaryView: View {
+//    let document: DocumentEntity
+//
+//    var body: some View {
+//        HStack {
+//        }
+//        .padding()
+//    }
+//}

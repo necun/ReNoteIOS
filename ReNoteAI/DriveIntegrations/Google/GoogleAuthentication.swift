@@ -8,9 +8,9 @@
 import Dependencies
 import Foundation
 import SwiftUI
-import SwiftData
 import GoogleDriveClient
 import CoreData
+import SwiftyDropbox
 
 
 class GoogleAuthentication: ObservableObject {
@@ -76,19 +76,25 @@ class GoogleAuthentication: ObservableObject {
     
 
     
-    func checkIsSignedIn () {
+    func checkIsSignedIn() {
         Task {
             for await isSignedIn in client.auth.isSignedInStream() {
                 DispatchQueue.main.async {
                     self.isSignedIn = isSignedIn
-                    if (isSignedIn) {
-                        DataBaseManager.shared.saveUserInfo()
+                    if isSignedIn {
+                        // Replace these values with actual data from your application's context
+                        let email = "" // Example; use the actual email
+                        let userType = "Google" // Example; determine the actual user type
+                        let mainFolderID = "" // Example; use the actual main folder ID obtained from Google Drive
+                        
+                        DataBaseManager.shared.saveUserInfo(email: email, userType: userType, mainFolderID: mainFolderID)
                         self.listFiles()
                     }
                 }
             }
         }
     }
+
     
     func onOpenURL (url:URL) {
         Task<Void, Never> {
@@ -219,56 +225,88 @@ class GoogleAuthentication: ObservableObject {
 extension GoogleAuthentication {
     
     func syncAppFoldersWithDrive() {
-        guard let mainFolderID = DataBaseManager.shared.mainFolderID else { return }
-        
-        // Fetch local folders
-        let localFolders = fetchLocalFolders()
-        
-        // Fetch folders from Drive
-        Task {
-            let driveFolders = try await fetchDriveFolders(parentFolderID: mainFolderID)
-            
-            // Determine which local folders need to be created in Drive
-            let foldersToCreate = localFolders.filter { localFolder in
-                !driveFolders.contains { $0.name == localFolder.name }
+           guard let mainFolderID = DataBaseManager.shared.mainFolderID else { return }
+
+           Task {
+               let driveFolders = try await self.fetchDriveFolders(parentFolderID: mainFolderID)
+               
+               let localFolders = fetchLocalFolders()
+
+               for folder in localFolders {
+                   // Check if folder exists in Drive
+                   if let driveFolder = driveFolders.first(where: { $0.name == folder.name }) {
+                       // Folder exists in Drive, sync documents within this folder
+                       syncDocumentsForFolder(localFolder: folder, driveFolderID: driveFolder.id)
+                   } else {
+                       // If not, create it in Drive
+                       if let createdFolderID = await createFolderInDrive(name: folder.name ?? "", parentFolderID: mainFolderID) {
+                           DataBaseManager.shared.updateFolderWithDriveID(for: folder, with: createdFolderID)
+                           // Sync documents within this newly created folder
+                           syncDocumentsForFolder(localFolder: folder, driveFolderID: createdFolderID)
+                       }
+                   }
+               }
+           }
+       }
+
+    func createFolderInDrive(name: String, parentFolderID: String) async -> String? {
+            do {
+                let createdFolder = try await client.createFile(
+                    name: name,
+                    spaces: "drive",
+                    mimeType: "application/vnd.google-apps.folder",
+                    parents: [parentFolderID],
+                    data: Data()
+                )
+                print("Folder created successfully in Google Drive with ID: \(createdFolder.id)")
+                return createdFolder.id
+            } catch {
+                print("Failed to create folder in Google Drive: \(error)")
+                return nil
             }
-            
-            // Create missing folders in Drive
-            for folder in foldersToCreate {
-                await createFolderInDrive(name: folder.name, parentFolderID: mainFolderID)
+        }
+    
+    
+    func syncDocumentsForFolder(localFolder: FolderEntity, driveFolderID: String) {
+        let documents = DataBaseManager.shared.fetchDocumentsForFolder(localFolder)
+
+        for document in documents {
+            // Use imageData instead of documentData
+            guard let documentData = document.imageData,
+                  let documentName = document.name else {
+                continue
+            }
+            let documentURL = FileManager.default.temporaryDirectory.appendingPathComponent(documentName)
+
+            do {
+                try documentData.write(to: documentURL)
+                uploadFile(fileURL: documentURL, fileName: documentName, folderID: driveFolderID)
+            } catch {
+                print("Error writing document data to file: \(error)")
             }
         }
     }
     
     
-    func fetchLocalFolders() -> [Folder] {
+
+
+
+    
+
+    
+    func fetchLocalFolders() -> [FolderEntity] {
         let context = PersistenceController.shared.container.viewContext
         let fetchRequest: NSFetchRequest<FolderEntity> = FolderEntity.fetchRequest()
-        
+
         do {
             let folderEntities = try context.fetch(fetchRequest)
-            
-            // Convert FolderEntity instances to Folder models
-            let folders = folderEntities.map { entity -> Folder in
-                return Folder(
-                    id: entity.id?.uuidString ?? UUID().uuidString,
-                    name: entity.name ?? "",
-                    updatedDate: entity.updatedDate ?? Date(),
-                    createdDate: entity.createdDate ?? Date(),
-                    isSyced: entity.isSyced,
-                    isFavourite: entity.isFavourite,
-                    isPin: entity.isPin,
-                    driveType: entity.driveType ?? "",
-                    fileCount: Int(entity.fileCount)
-                )
-            }
-            
-            return folders
+            return folderEntities
         } catch {
             print("Failed to fetch folders: \(error)")
             return [] // Return an empty array in case of error
         }
     }
+
     
     
     private func fetchDriveFolders(parentFolderID: String) async throws -> [File] {
