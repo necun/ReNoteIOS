@@ -3,7 +3,7 @@ import SwiftUI
 import GoogleDriveClient
 import CoreData
 import AuthenticationServices
-
+//frgdnbhyteyt
 struct ProfileView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var dataBaseManager: DataBaseManager
