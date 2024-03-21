@@ -2,7 +2,7 @@
 //  ImageEntity+CoreDataProperties.swift
 //  
 //
-//  Created by Siddanathi Rohith on 18/03/24.
+//  Created by Siddanathi Rohith on 19/03/24.
 //
 //
 
@@ -32,6 +32,8 @@ extension ImageEntity {
     @NSManaged public var openCount: Int64
     @NSManaged public var tagId: UUID?
     @NSManaged public var upadatedDate: Date?
+    @NSManaged public var googleDriveFileID: String?
+    @NSManaged public var folderId: String?
     @NSManaged public var document: DocumentEntity?
 
 }

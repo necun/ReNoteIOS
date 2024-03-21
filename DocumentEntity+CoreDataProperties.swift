@@ -2,7 +2,7 @@
 //  DocumentEntity+CoreDataProperties.swift
 //  
 //
-//  Created by Siddanathi Rohith on 18/03/24.
+//  Created by Siddanathi Rohith on 19/03/24.
 //
 //
 
@@ -27,6 +27,7 @@ extension DocumentEntity {
     @NSManaged public var name: String?
     @NSManaged public var tagId: UUID?
     @NSManaged public var updatedDate: Date?
+    @NSManaged public var localFileURL: URL?
     @NSManaged public var folder: FolderEntity?
     @NSManaged public var image: NSSet?
 
