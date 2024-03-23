@@ -13,11 +13,11 @@
 		67749BFD2BAC2F670025BB22 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67749BFC2BAC2F670025BB22 /* ShareView.swift */; };
 		67749C012BAD81AD0025BB22 /* CroppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67749C002BAD81AD0025BB22 /* CroppingView.swift */; };
 		67749C032BAD99550025BB22 /* actualCroppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67749C022BAD99550025BB22 /* actualCroppingView.swift */; };
-		67749C052BADAA330025BB22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67749C042BADAA330025BB22 /* GoogleService-Info.plist */; };
 		67749C082BADAC2D0025BB22 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 67749C072BADAC2D0025BB22 /* FirebaseAnalytics */; };
 		67749C0A2BADAC2D0025BB22 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 67749C092BADAC2D0025BB22 /* FirebaseAuth */; };
 		67749C0C2BADAC2D0025BB22 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 67749C0B2BADAC2D0025BB22 /* FirebaseCrashlytics */; };
 		67749C0F2BAEAB490025BB22 /* CroppingScreenLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67749C0E2BAEAB490025BB22 /* CroppingScreenLogic.swift */; };
+		67749C492BAF312B0025BB22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67749C482BAF312B0025BB22 /* GoogleService-Info.plist */; };
 		733E70542B9444BD000ABE1B /* AddNewTagFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733E70532B9444BD000ABE1B /* AddNewTagFolderView.swift */; };
 		73C156972B85C744009DA167 /* CustomSingleSignOnButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156962B85C744009DA167 /* CustomSingleSignOnButton.swift */; };
 		73C156992B85C77E009DA167 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C156982B85C77E009DA167 /* CustomBackButton.swift */; };
@@ -83,8 +83,8 @@
 		67749BFC2BAC2F670025BB22 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		67749C002BAD81AD0025BB22 /* CroppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppingView.swift; sourceTree = "<group>"; };
 		67749C022BAD99550025BB22 /* actualCroppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = actualCroppingView.swift; sourceTree = "<group>"; };
-		67749C042BADAA330025BB22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67749C0E2BAEAB490025BB22 /* CroppingScreenLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppingScreenLogic.swift; sourceTree = "<group>"; };
+		67749C482BAF312B0025BB22 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		68EF319A4BD0136F1EA2E693 /* Pods-ReNoteAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReNoteAI.release.xcconfig"; path = "Target Support Files/Pods-ReNoteAI/Pods-ReNoteAI.release.xcconfig"; sourceTree = "<group>"; };
 		733E70532B9444BD000ABE1B /* AddNewTagFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTagFolderView.swift; sourceTree = "<group>"; };
 		73C156962B85C744009DA167 /* CustomSingleSignOnButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSingleSignOnButton.swift; sourceTree = "<group>"; };
@@ -269,6 +269,7 @@
 				C5B5AB292B91FE8300DFFFD6 /* SyncingFiles */,
 				73C157032B897B2C009DA167 /* GoogleAuthentication.swift */,
 				73C156FC2B8977A7009DA167 /* Dependencies.swift */,
+				67749C482BAF312B0025BB22 /* GoogleService-Info.plist */,
 			);
 			path = Google;
 			sourceTree = "<group>";
@@ -351,7 +352,6 @@
 		73FEA0BE2B7CF64D00E0CA77 /* Document Details */ = {
 			isa = PBXGroup;
 			children = (
-				67749C042BADAA330025BB22 /* GoogleService-Info.plist */,
 				73FEA0BF2B7CF66300E0CA77 /* DocumentDetailView.swift */,
 				73FEA0C12B7D83D600E0CA77 /* DocumentListingView.swift */,
 				73FEA0C62B7D95B900E0CA77 /* DocumentListView.swift */,
@@ -503,9 +503,9 @@
 			files = (
 				73FEA0712B7C55E600E0CA77 /* Preview Assets.xcassets in Resources */,
 				73FEA06E2B7C55E600E0CA77 /* Assets.xcassets in Resources */,
+				67749C492BAF312B0025BB22 /* GoogleService-Info.plist in Resources */,
 				73C156BF2B85E67A009DA167 /* Launch Screen.storyboard in Resources */,
 				C5528DEC2B88712A00820F85 /* Microsoft Property List.plist in Resources */,
-				67749C052BADAA330025BB22 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -789,7 +789,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ReNoteAi.ReNoteAi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renoteai.renoteiosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -828,7 +828,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ReNoteAi.ReNoteAi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.renoteai.renoteiosapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
