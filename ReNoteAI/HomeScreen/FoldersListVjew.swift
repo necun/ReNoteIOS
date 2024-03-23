@@ -70,13 +70,14 @@ struct FoldersListView: View {
                                         Text(folder.name ?? "")
                                             .font(.headline)
                                             .lineLimit(1)
+                                            .foregroundColor(.black)
 
-                                        Text(folder.id?.uuidString ?? "")
-                                            .font(.caption)
-                                            .foregroundColor(.gray)
+//                                        Text(folder.id?.uuidString ?? "")
+//                                            .font(.caption)
+//                                            .foregroundColor(.gray)
                                     }
                                     .padding([.leading], 10)
-                                    .padding([.bottom], 10)
+                                    .padding([.top], 5)
 
                                     Spacer()
 

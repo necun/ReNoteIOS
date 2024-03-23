@@ -3,7 +3,7 @@ import SwiftUI
 import GoogleDriveClient
 import CoreData
 import AuthenticationServices
-//frgdnbhyteyt
+
 struct ProfileView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var dataBaseManager: DataBaseManager
@@ -57,19 +57,18 @@ struct ProfileView: View {
                 else {
                    
                     Logo()
-                    Spacer()
+                    Spacer(minLength: 140)
+                googleAuthentication.googleSignInButton
                     
-                    googleAuthentication.googleSignInButton
-                    
-                    CustomSingleSignOnButton(
-                        backgroundColor: Color.white,
-                        imageName: "Microsoft",
-                        buttonText: "Sign in with Microsoft Account",
-                        textColor: .black,
-                        buttonAction: {
-                            self.showingLoginPageMicrosoft = true
-                        }
-                    )
+//                    CustomSingleSignOnButton(
+//                        backgroundColor: Color.white,
+//                        imageName: "Microsoft",
+//                        buttonText: "Sign in with Microsoft Account",
+//                        textColor: .black,
+//                        buttonAction: {
+//                            self.showingLoginPageMicrosoft = true
+//                        }
+//                    )
                     
 //                    AppleAuthentication.shared.appleSignInButton
 //
@@ -87,7 +86,7 @@ struct ProfileView: View {
 //                        EmailSignUpButton()
 //                    }
 
-                    Spacer()
+                  Spacer()
 //                    HStack {
 //                        Text("Already have an account?")
 //                        Button(action: {

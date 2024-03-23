@@ -26,6 +26,7 @@ struct HomeScreen: View {
     @Environment(\.modelContext) private var modelContext
     @State var showBannerView: Bool = true
     @ObservedObject var dataBaseManager = DataBaseManager.shared
+    @EnvironmentObject var navigationViewModel: NavigationViewModel
     
     
     @State private var searchString = ""
@@ -126,6 +127,8 @@ struct HomeScreen: View {
                             Image("Folderplus")
                                 .foregroundColor(.gray)
                         }
+                        
+
                         
                         Menu {
                             Button("Name", action: { /* sorting by name */ })
@@ -313,9 +316,16 @@ struct HomeScreen: View {
                     ToolbarItem(placement: .topBarLeading) {
                         HStack {
                             Image("Logo")
+                                .resizable() // Make the image resizable.
+                                .scaledToFit() // Keep the aspect ratio.
+                                .frame(width: 70, height: 70) // Specify the desired width and height.
                             Image("Logo1")
+                                .resizable() // Make the image resizable.
+                                .scaledToFit() // Keep the aspect ratio.
+                                .frame(width: 70, height: 70) // Specify the desired width and height.
                         }
                     }
+
                     
                     //                    ToolbarItem() {
                     //                        Menu("Sort", systemImage: "arrow.up.arrow.down") {

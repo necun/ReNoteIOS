@@ -5,9 +5,9 @@ import GoogleDriveClient
 extension GoogleDriveClient.Client: DependencyKey {
   public static let liveValue = Client.live(
     config: Config(
-      clientID: "727694843107-ju2h90lb51e3rdntr8p159spl4sscmuo.apps.googleusercontent.com",
+      clientID: "177174074358-7t9ld94h3ekdrkanu9qrpkl4nsm8igni.apps.googleusercontent.com",
       authScope: "https://www.googleapis.com/auth/drive",
-      redirectURI: "com.googleusercontent.apps.727694843107-ju2h90lb51e3rdntr8p159spl4sscmuo://"
+      redirectURI: "com.googleusercontent.apps.177174074358-7t9ld94h3ekdrkanu9qrpkl4nsm8igni://"
     )
   )
 

@@ -38,29 +38,7 @@ func createMainFolderInGDrive()  async {
     }
 }
 
-//func CreateSubFolderInGDrive(newFolderName: String) async {
-//    if let mainFolderID = DataBaseManager.shared.mainFolderID {
-//        do {
-//            let dateText = Date().formatted(date: .complete, time: .complete)
-//            let fileData = try await GoogleAuthentication.shared.client.createFile(
-//                name: newFolderName,
-//                spaces: "ReNote",
-//                mimeType: "application/vnd.google-apps.folder",
-//                parents: [mainFolderID],
-//                data: "Hello, World!\nCreated at \(dateText)".data(using: .utf8)!
-//            )
-//            DataBaseManager.shared.createSubFolder(fileID: fileData.id, newFolderName: newFolderName)
-//        } catch {
-//            print("CreateFile failure",
-//                  "error", "\(error)",
-//                  "localizedDescription", "\(error.localizedDescription)"
-//            )
-//        }
-//
-//    }
-//    
-//}
-//
+
 func DeleteFolderInGDrive() {
     
 }

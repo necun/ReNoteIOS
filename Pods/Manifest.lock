@@ -29,6 +29,7 @@ PODS:
   - MSAL/app-lib (1.2.22)
   - PDFGenerator (3.1.0)
   - QBImagePickerController (3.4.0)
+  - QCropper (0.1.7)
   - SDWebImage (3.8.3):
     - SDWebImage/Core (= 3.8.3)
   - SDWebImage/Core (3.8.3)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - MSAL
   - PDFGenerator
   - QBImagePickerController (~> 3.4)
+  - QCropper
   - SDWebImage (~> 3.6)
   - SwiftyDropbox (~> 5.1.0)
   - SwiftyJSON (~> 5.0)
@@ -62,6 +64,7 @@ SPEC REPOS:
     - MSAL
     - PDFGenerator
     - QBImagePickerController
+    - QCropper
     - SDWebImage
     - SwiftyDropbox
     - SwiftyJSON
@@ -77,11 +80,12 @@ SPEC CHECKSUMS:
   MSAL: aa2b5d45e9bcceb6233c15240d65050777e27879
   PDFGenerator: 17d6bc525db0a3fcd156fbf00f9d1b8d5cc75d1e
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  QCropper: aef6bad1e683e62b501fb8258359ccd10c68b4f2
   SDWebImage: a72e880a8fe0f7fc31efe15aaed443c074d2a80c
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: 473485ef2b9aa388999fb5d4d35499fca89e1f43
+PODFILE CHECKSUM: ca92e5dda8cb5075686c400e4d9d6db75cd415bf
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

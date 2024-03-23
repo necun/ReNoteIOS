@@ -25,9 +25,9 @@ var body: some View {
             
             nameInputView()
             
-            accountSelectionView()
-            
-            emailPhoneInputView()
+//            accountSelectionView()
+//            
+//            emailPhoneInputView()
             
             createFolderButton()
         }
@@ -58,7 +58,7 @@ var body: some View {
     private func nameInputView() -> some View {
         HStack {
             Text("Name")
-                .frame(width: 100, alignment: .leading)
+                .frame(width: 50, alignment: .leading)
             TextField("Enter Name", text: $newName)
                 .customTextFieldStyle(cornerRadius: 25) // Use your desired corner radius
                 .foregroundColor(.gray)
@@ -75,46 +75,46 @@ var body: some View {
         return noDots.replacingOccurrences(of: "  ", with: " ")
     }
     
-    @ViewBuilder
-    private func accountSelectionView() -> some View {
-        HStack {
-            Text("Save/ Share")
-                .frame(width: 100, alignment: .leading)
-            
-            Menu {
-                Button("Device", action: { self.selectedAccount = "Device" })
-                Button("Sync to GDrive", action: { self.selectedAccount = "Sync to GDrive" })
-            } label: {
-                HStack {
-                    Text(selectedAccount)
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(.gray)
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(
-                    RoundedRectangle(cornerRadius: 40)
-                        .strokeBorder(Color.gray, lineWidth: 1)
-                )
-            }
-        }
-        .padding(.horizontal)
-    }
+//    @ViewBuilder
+//    private func accountSelectionView() -> some View {
+//        HStack {
+//            Text("Save/ Share")
+//                .frame(width: 100, alignment: .leading)
+//            
+//            Menu {
+//                Button("Device", action: { self.selectedAccount = "Device" })
+//                Button("Sync to GDrive", action: { self.selectedAccount = "Sync to GDrive" })
+//            } label: {
+//                HStack {
+//                    Text(selectedAccount)
+//                        .foregroundColor(.gray)
+//                    Spacer()
+//                    Image(systemName: "chevron.down")
+//                        .foregroundColor(.gray)
+//                }
+//                .padding()
+//                .frame(maxWidth: .infinity)
+//                .background(
+//                    RoundedRectangle(cornerRadius: 40)
+//                        .strokeBorder(Color.gray, lineWidth: 1)
+//                )
+//            }
+//        }
+//        .padding(.horizontal)
+//    }
  
     
-    @ViewBuilder
-    private func emailPhoneInputView() -> some View {
-        HStack {
-            Text("Email/Phone")
-                .frame(width: 100, alignment: .leading)
-            TextField("oliviahye@gmail.com", text: $emailAddress)
-                .customTextFieldStyle(cornerRadius: 25)
-                .foregroundColor(.gray)
-        }
-        .padding(.horizontal)
-    }
+//    @ViewBuilder
+//    private func emailPhoneInputView() -> some View {
+//        HStack {
+//            Text("Email/Phone")
+//                .frame(width: 100, alignment: .leading)
+//            TextField("oliviahye@gmail.com", text: $emailAddress)
+//                .customTextFieldStyle(cornerRadius: 25)
+//                .foregroundColor(.gray)
+//        }
+//        .padding(.horizontal)
+//    }
     
     @ViewBuilder
     private func createFolderButton() -> some View {
@@ -140,7 +140,7 @@ var body: some View {
                 .cornerRadius(30)
         }
         .padding(.horizontal)
-        .presentationDetents([.custom(MyDetent.self)])
+        .presentationDetents([.height(250)])
         .safeAreaInset(edge: .bottom) {
             
         }
@@ -175,3 +175,4 @@ extension View {
 //        completion()
 //    }
 //}
+

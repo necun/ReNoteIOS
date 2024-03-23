@@ -21,6 +21,7 @@ target 'ReNoteAI' do
   pod 'Zip', '~> 2.1' #earlier ~> 1.1
   pod 'QBImagePickerController', '~> 3.4'
   pod 'MSAL'
+  pod 'QCropper'
 end
 
 post_install do |installer|

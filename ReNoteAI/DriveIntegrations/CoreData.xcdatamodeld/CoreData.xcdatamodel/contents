@@ -9,6 +9,7 @@
         <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isPin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSynced" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="localFileURL" optional="YES" attributeType="URI"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="tagId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="updatedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -34,6 +35,8 @@
         <attribute name="driveType" optional="YES" attributeType="String"/>
         <attribute name="fileData" optional="YES" attributeType="Binary"/>
         <attribute name="fileExtension" optional="YES" attributeType="String"/>
+        <attribute name="folderId" optional="YES" attributeType="String"/>
+        <attribute name="googleDriveFileID" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

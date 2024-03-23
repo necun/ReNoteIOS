@@ -101,15 +101,15 @@ struct FolderDetailsView: View {
             
             
             
-            ScrollView(.vertical){
+            ScrollView {
                 ForEach(documents, id: \.self) { document in
-                    NavigationLink(destination: MultiImageDisplayView(document: document), isActive: .constant(false)) {
-                                           DocumentCellView(document: document)
-                                       }
+                    NavigationLink(destination: MultiImageDisplayView(document: document)) {
+                        DocumentCellView(document: document)
+                    }
                 }
-                .onDelete(perform: deleteDocuments)
+                .onDelete(perform: deleteDocuments) // Ensure this is applied directly to the ForEach
             }
-            
+
         }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.top)
@@ -215,19 +215,38 @@ struct FolderDetailsView: View {
         }
         .padding(.horizontal)
         .frame(maxWidth: .infinity,maxHeight: 180)
+        .contextMenu { // Context menu added here
+            Button(action: {
+                // Delete action
+                deleteDocument(document)
+            }) {
+                Label("Delete", systemImage: "trash")
+            }
+        }
     }
     
     
+    private func deleteDocument(_ documentToDelete: DocumentEntity) {
+        viewContext.delete(documentToDelete)
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+
+    
     private func deleteDocuments(at offsets: IndexSet) {
-           for index in offsets {
-               let document = documents[index]
-               viewContext.delete(document)
-           }
-           do {
-               try viewContext.save()
-           } catch {
-               let nsError = error as NSError
-               fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-           }
-       }
+        for index in offsets {
+            let document = documents[index]
+            viewContext.delete(document)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
 }

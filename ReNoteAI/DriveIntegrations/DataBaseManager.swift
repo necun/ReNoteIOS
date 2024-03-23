@@ -247,72 +247,6 @@ class DataBaseManager: ObservableObject {
     }
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    func saveDocument(name: String, fileData: Data, folderId: String?) {
-//        let context = PersistenceController.shared.container.viewContext
-//        let newDocument = DocumentEntity(context: context)
-//        newDocument.id = UUID().uuidString
-//        newDocument.name = name
-//        newDocument.createdDate = Date()
-//        newDocument.updatedDate = Date()
-//        newDocument.fileData = fileData
-//        if let folderId = folderId {
-//            newDocument.folderId = folderId
-//        }
-//        // Set other attributes as necessary
-//
-//        do {
-//            try context.save()
-//            print("Document saved successfully")
-//            DispatchQueue.main.async {
-//                self.refreshDocuments() // Fetches documents from CoreData and updates the observable array
-//            }
-//        } catch {
-//            print("Failed to save document: \(error)")
-//        }
-//    }
-//
-//
-//
-//    func refreshDocuments() {
-//        let context = PersistenceController.shared.container.viewContext
-//        let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
-//
-//        do {
-//            let result = try context.fetch(fetchRequest)
-//            DispatchQueue.main.async {
-//                self.documents = result.map { $0.toDocumentModel() } // Convert Core Data entities to your model
-//            }
-//        } catch {
-//            print("Failed to fetch documents: \(error)")
-//        }
-//    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
      func updateDocumentsInLocalDB(documentsFromCloud: [String: Any]) {
         for (documentIDString, documentInfo) in documentsFromCloud {
             guard let documentDict = documentInfo as? [String: Any],
@@ -409,7 +343,7 @@ extension DataBaseManager {
 }
 
 extension DataBaseManager {
-    func saveDocument(name: String, fileData: Data, folderId: UUID?) {
+    func saveDocument(name: String, fileData: Data, folderId: UUID?, completion: @escaping (Bool, DocumentEntity?) -> Void) {
         print("Saving document with name: \(name), folderId: \(String(describing: folderId))")
         let newDocument = DocumentEntity(context: context)
         newDocument.id = UUID()
@@ -518,53 +452,3 @@ extension DataBaseManager {
         }
     }
 }
-
-
-
-
-//extension DataBaseManager {
-//    func refreshDocuments() {
-//        let fetchRequest: NSFetchRequest<DocumentEntity> = DocumentEntity.fetchRequest()
-//        do {
-//            let fetchedDocuments = try context.fetch(fetchRequest)
-//            DispatchQueue.main.async {
-//                self.documents = fetchedDocuments.map { entity in
-//                    Document(
-//                        id: entity.id?.uuidString ?? UUID().uuidString,
-//                        name: entity.name ?? "",
-//                        createdDate: entity.createdDate ?? Date(),
-//                        updatedDate: entity.updatedDate ?? Date(),
-//                        fileData: entity.fileData ?? Data(),
-//                        isSynced: entity.isSynced,
-//                        isPin: entity.isPin,
-//                        isFavourite: entity.isFavourite,
-//                        folderId: entity.folderId?.uuidString ?? UUID().uuidString, // Correctly match to folderId
-//                        tagId: entity.tagId ?? "", // Correctly match to tagId
-//                        openCount: Int(entity.openCount), // Correctly use openCount as Int
-//                        localFilePathIos: entity.localFilePathIos ?? "", // Correctly match to localFilePathIos
-//                        localFilePathAndroid: entity.localFilePathAndroid ?? "", // Correctly match to localFilePathAndroid
-//                        driveType: entity.driveType ?? "", // Correctly match to driveType
-//                        fileExtension: entity.fileExtension ?? "" // Correctly match to fileExtension
-//                    )
-//                }
-//            }
-//        } catch {
-//            print("Failed to fetch documents: \(error)")
-//        }
-//    }
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

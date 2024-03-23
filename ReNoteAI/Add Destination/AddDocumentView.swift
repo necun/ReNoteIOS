@@ -5,10 +5,13 @@ import UniformTypeIdentifiers
 import VisionKit
  
  
- 
+  
 struct DocumentScanner: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     @Binding var scannedImages: [UIImage]
+    var onScanningComplete: () -> Void // Closure to be called when scanning is done
+    @State private var showingPreviewScreen = false // This will be set to true to show the preview screen
+
     var completion: (() -> Void)? // Completion closure
     
     func makeCoordinator() -> Coordinator {
@@ -37,11 +40,10 @@ struct DocumentScanner: UIViewControllerRepresentable {
                 let image = scan.imageOfPage(at: pageIndex)
                 parent.scannedImages.append(image)
             }
-            print("Scanned images count: \(parent.scannedImages.count)") // Check how many images are scanned
-            parent.completion?() // Call the completion handler
+            parent.onScanningComplete() // Set this to trigger the sheet presentation
             parent.presentationMode.wrappedValue.dismiss()
         }
- 
+
         func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
             parent.presentationMode.wrappedValue.dismiss()
         }
@@ -156,9 +158,9 @@ struct AddDocumentView: View {
                     ])
                 }
  
-                .fullScreenCover(isPresented: $showDocumentScanner) {
-                    DocumentScanner(scannedImages: $scannedImages)
-                }
+//                .fullScreenCover(isPresented: $showDocumentScanner) {
+//                    DocumentScanner(scannedImages: $scannedImages, onScanningComplete: <#() -> Void#>)
+//                }
                 
                 
                 VStack{

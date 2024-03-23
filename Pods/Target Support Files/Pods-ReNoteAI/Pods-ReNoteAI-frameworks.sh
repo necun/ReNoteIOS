@@ -41,7 +41,7 @@ install_framework()
 
   if [ -L "${source}" ]; then
     echo "Symlinked..."
-    source="$(readlink "${source}")"
+    source="$(readlink -f "${source}")"
   fi
 
   if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then
@@ -185,6 +185,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PDFGenerator/PDFGenerator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QBImagePickerController/QBImagePickerController.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/QCropper/QCropper.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
@@ -200,6 +201,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/MSAL/MSAL.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/PDFGenerator/PDFGenerator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QBImagePickerController/QBImagePickerController.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/QCropper/QCropper.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyDropbox/SwiftyDropbox.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"

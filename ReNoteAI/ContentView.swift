@@ -6,10 +6,14 @@ struct ContentView: View {
   
     @State private var selectedTab = "One"
     @State private var scannedImages: [UIImage] = []
+    @State private var showingPreviewScreen = false 
+    @StateObject private var navigationViewModel = NavigationViewModel()// This will be set to true to show the preview screen
+
     @State private var showingScanner = false
         @State private var scannedCode: String?
         @StateObject private var scannerViewModel = ScannerViewModel()
-    @State private var showingImportScreen = false
+    @State private var selectedFilter: PreviewAndEditingScreen.FilterType = .original
+    @State private var filterContrast: CGFloat = 1.0
  
     
     var body: some View {
@@ -38,23 +42,34 @@ struct ContentView: View {
                                         .ignoresSafeArea()
             //            CameraView(image: $image, documents: $documents)
             DocumentScanner(scannedImages: $scannedImages) {
-                showingImportScreen = true
+                self.showingPreviewScreen = true // Set this state to true when scanning is done
             }
             .tabItem {
-                VStack{
+                VStack {
                     Image("Camera")
                         .foregroundColor(selectedTab == "Three" ? .green : .gray)
                     Text("")
                         .foregroundColor(selectedTab == "Three" ? .green : .gray)
                 }
             }
-            .sheet(isPresented: $showingImportScreen) {
-                ImportScreen(
-                    scannedImages: $scannedImages,
-                    dataBaseManager: DataBaseManager.shared
-                )
-            }
-
+            .fullScreenCover(isPresented: $showingPreviewScreen) {
+                        // Present the PreviewAndEditingScreen
+                        PreviewAndEditingScreen(
+                            scannedImages: $scannedImages,
+                            selectedFilter: $selectedFilter,
+                            filterContrast: $filterContrast,
+                            autoEnhance: { /* logic for auto enhance */ },
+                            cropImage: { /* logic for crop image */ },
+                            applyFilter: { /* logic for apply filter */ },
+                            rotateImage: { /* logic for rotate image */ },
+                            deleteImage: { /* logic for delete image */ },
+                            goBack: { /* logic for go back */ },
+                            retake: { /* logic for retake */ },
+                            scanMore: { /* logic for scan more */ },
+                            share: { /* logic for share */ },
+                            save: { /* logic for save */ }
+                        )
+                    }
             .ignoresSafeArea()
             .tag("Three")
             //            CameraView(image: $image, documents: $documents)

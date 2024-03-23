@@ -2,24 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:FolderEntity+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:FolderEntity+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:UserEntity+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:UserEntity+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:DocumentEntity+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:DocumentEntity+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:ImageEntity+CoreDataClass.swift">
    </FileRef>
    <FileRef
@@ -30,6 +12,24 @@
    </FileRef>
    <FileRef
       location = "group:TagEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:UserEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:UserEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:FolderEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:FolderEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:DocumentEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:DocumentEntity+CoreDataProperties.swift">
    </FileRef>
    <FileRef
       location = "group:ReNoteAI.xcodeproj">
