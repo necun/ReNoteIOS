@@ -29,7 +29,7 @@ struct SignInOTPView: View {
                     }
                     Spacer(minLength: 80)
                     
-                    Text("Enter the OTP:")
+                    Text("Enter the OTP")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(Color(red: 18.0, green: 175.0, blue: 58.0))
