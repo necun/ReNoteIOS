@@ -1,6 +1,6 @@
 //
 //  SchemaData.swift
-//  ReNoteAI
+//  ReNoteAI..
 //
 //  Created by Siddanathi Rohith on 28/02/24.
 //
